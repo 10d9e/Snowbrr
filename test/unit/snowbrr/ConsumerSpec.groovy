@@ -24,8 +24,8 @@ class ConsumerSpec extends Specification {
     void "test create valid consumer"() {
 
         when:
-        Consumer consumer = new Consumer(user: User.build(), firstname: "Jay", lastname: "Logelin", address: "421 Vanier Street", city: "Dieppe",
-                province: "NB", email: "jay.logelin@gmail.com", country: "Canada", latitude: 12, longitude: 12, driveway: new Driveway(length: 100, width: 75))
+        Consumer consumer = new Consumer(user: new User( username: "jay", password: "jay", firstname: "Jay", lastname: "Logelin", address: "421 Vanier Street", city: "Dieppe",
+                province: "NB", email: "jay.logelin@gmail.com", country: "Canada", latitude: 12, longitude: 12), driveway: new Driveway(length: 100, width: 75))
 
         consumer.addToMessages(new Message(fromUsername: "User1",  content: "This is a message", timestamp: new Date()) )
         consumer.addToMessages(new Message(fromUsername: "User2",  content: "This is a message", timestamp: new Date()) )
@@ -40,8 +40,7 @@ class ConsumerSpec extends Specification {
     void "test create consumer fails when user is null"() {
 
         when:
-        Consumer consumer = new Consumer( firstname: "Jay", lastname: "Logelin", address: "421 Vanier Street", city: "Dieppe",
-                province: "NB", email: "jay.logelin@gmail.com", country: "Canada", latitude: 12, longitude: 12, driveway: new Driveway(length: 100, width: 75))
+        Consumer consumer = new Consumer( driveway: new Driveway(length: 100, width: 75))
 
         consumer.addToMessages(new Message(fromUsername: "User1",  content: "This is a message", timestamp: new Date()) )
         consumer.addToMessages(new Message(fromUsername: "User2",  content: "This is a message", timestamp: new Date()) )
@@ -56,8 +55,8 @@ class ConsumerSpec extends Specification {
     void "test create consumer fails when email is invalid"() {
 
         when:
-        Consumer consumer = new Consumer(user: User.build(), firstname: "Jay", lastname: "Logelin", address: "421 Vanier Street", city: "Dieppe",
-                province: "NB", email: "blah", country: "Canada", latitude: 12, longitude: 12, driveway: new Driveway(length: 100, width: 75))
+        Consumer consumer = new Consumer(user: new User( username: "jay", password: "jay", firstname: "Jay", lastname: "Logelin", address: "421 Vanier Street", city: "Dieppe",
+                province: "NB", email: "dfghfgh", country: "Canada", latitude: 12, longitude: 12), driveway: new Driveway(length: 100, width: 75))
 
         consumer.addToMessages(new Message(fromUsername: "User1",  content: "This is a message", timestamp: new Date()) )
         consumer.addToMessages(new Message(fromUsername: "User2",  content: "This is a message", timestamp: new Date()) )
@@ -66,15 +65,15 @@ class ConsumerSpec extends Specification {
         consumer.addToMessages(new Message(fromUsername: "User5",  content: "This is a message", timestamp: new Date()) )
 
         then:
-        assertFalse consumer.validate()
-        assertTrue consumer.errors.hasFieldErrors('email')
+        assertFalse consumer.user.validate()
+        assertTrue consumer.user.errors.hasFieldErrors('email')
     }
 
     void "test create consumer fails when firstname is null"() {
 
         when:
-        Consumer consumer = new Consumer(user: User.build(), lastname: "Logelin", address: "421 Vanier Street", city: "Dieppe",
-                province: "NB", email: "jay.logelin@gmail.com", country: "Canada", latitude: 12, longitude: 12, driveway: new Driveway(length: 100, width: 75))
+        Consumer consumer = new Consumer(user: new User( username: "jay", password: "jay", lastname: "Logelin", address: "421 Vanier Street", city: "Dieppe",
+                province: "NB", email: "jay.logelin@gmail.com", country: "Canada", latitude: 12, longitude: 12), driveway: new Driveway(length: 100, width: 75))
 
         consumer.addToMessages(new Message(fromUsername: "User1",  content: "This is a message", timestamp: new Date()) )
         consumer.addToMessages(new Message(fromUsername: "User2",  content: "This is a message", timestamp: new Date()) )
@@ -83,15 +82,15 @@ class ConsumerSpec extends Specification {
         consumer.addToMessages(new Message(fromUsername: "User5",  content: "This is a message", timestamp: new Date()) )
 
         then:
-        assertFalse consumer.validate()
-        assertTrue consumer.errors.hasFieldErrors('firstname')
+        assertFalse consumer.user.validate()
+        assertTrue consumer.user.errors.hasFieldErrors('firstname')
     }
 
     void "test create consumer fails when lastname is null"() {
 
         when:
-        Consumer consumer = new Consumer(user: User.build(), firstname: "Jay", address: "421 Vanier Street", city: "Dieppe",
-                province: "NB", email: "jay.logelin@gmail.com", country: "Canada", latitude: 12, longitude: 12, driveway: new Driveway(length: 100, width: 75))
+        Consumer consumer = new Consumer(user: new User( username: "jay", password: "jay", firstname: "Jay", address: "421 Vanier Street", city: "Dieppe",
+                province: "NB", email: "jay.logelin@gmail.com", country: "Canada", latitude: 12, longitude: 12), driveway: new Driveway(length: 100, width: 75))
 
         consumer.addToMessages(new Message(fromUsername: "User1",  content: "This is a message", timestamp: new Date()) )
         consumer.addToMessages(new Message(fromUsername: "User2",  content: "This is a message", timestamp: new Date()) )
@@ -100,16 +99,16 @@ class ConsumerSpec extends Specification {
         consumer.addToMessages(new Message(fromUsername: "User5",  content: "This is a message", timestamp: new Date()) )
 
         then:
-        assertFalse consumer.validate()
-        assertTrue consumer.errors.hasFieldErrors('lastname')
+        assertFalse consumer.user.validate()
+        assertTrue consumer.user.errors.hasFieldErrors('lastname')
     }
 
     void "test create consumer fails when address is null"() {
 
         when:
 
-        Consumer consumer = new Consumer(user: User.build(), firstname: "Jay", lastname: "Logelin", city: "Dieppe",
-                province: "NB", email: "jay.logelin@gmail.com", country: "Canada", latitude: 12, longitude: 12, driveway: new Driveway(length: 100, width: 75))
+        Consumer consumer = new Consumer(user: new User( username: "jay", password: "jay", firstname: "Jay", lastname: "Logelin", city: "Dieppe",
+                province: "NB", email: "jay.logelin@gmail.com", country: "Canada", latitude: 12, longitude: 12), driveway: new Driveway(length: 100, width: 75))
 
         consumer.addToMessages(new Message(fromUsername: "User1",  content: "This is a message", timestamp: new Date()) )
         consumer.addToMessages(new Message(fromUsername: "User2",  content: "This is a message", timestamp: new Date()) )
@@ -118,16 +117,16 @@ class ConsumerSpec extends Specification {
         consumer.addToMessages(new Message(fromUsername: "User5",  content: "This is a message", timestamp: new Date()) )
 
         then:
-        assertFalse consumer.validate()
-        assertTrue consumer.errors.hasFieldErrors('address')
+        assertFalse consumer.user.validate()
+        assertTrue consumer.user.errors.hasFieldErrors('address')
     }
 
     void "test create consumer fails when city is null"() {
 
         when:
 
-        Consumer consumer = new Consumer(user: User.build(), firstname: "Jay", lastname: "Logelin", address: "421 Vanier Street",
-                province: "NB", email: "jay.logelin@gmail.com", country: "Canada", latitude: 12, longitude: 12, driveway: new Driveway(length: 100, width: 75))
+        Consumer consumer = new Consumer(user: new User( username: "jay", password: "jay", firstname: "Jay", lastname: "Logelin", address: "421 Vanier Street",
+                province: "NB", email: "jay.logelin@gmail.com", country: "Canada", latitude: 12, longitude: 12), driveway: new Driveway(length: 100, width: 75))
 
         consumer.addToMessages(new Message(fromUsername: "User1",  content: "This is a message", timestamp: new Date()) )
         consumer.addToMessages(new Message(fromUsername: "User2",  content: "This is a message", timestamp: new Date()) )
@@ -136,16 +135,16 @@ class ConsumerSpec extends Specification {
         consumer.addToMessages(new Message(fromUsername: "User5",  content: "This is a message", timestamp: new Date()) )
 
         then:
-        assertFalse consumer.validate()
-        assertTrue consumer.errors.hasFieldErrors('city')
+        assertFalse consumer.user.validate()
+        assertTrue consumer.user.errors.hasFieldErrors('city')
     }
 
     void "test create consumer fails when province is null"() {
 
         when:
 
-        Consumer consumer = new Consumer(user: User.build(), firstname: "Jay", lastname: "Logelin", address: "421 Vanier Street", city: "Dieppe",
-                email: "jay.logelin@gmail.com", country: "Canada", latitude: 12, longitude: 12, driveway: new Driveway(length: 100, width: 75))
+        Consumer consumer = new Consumer(user: new User( username: "jay", password: "jay", firstname: "Jay", lastname: "Logelin", address: "421 Vanier Street", city: "Dieppe",
+                email: "jay.logelin@gmail.com", country: "Canada", latitude: 12, longitude: 12), driveway: new Driveway(length: 100, width: 75))
 
         consumer.addToMessages(new Message(fromUsername: "User1",  content: "This is a message", timestamp: new Date()) )
         consumer.addToMessages(new Message(fromUsername: "User2",  content: "This is a message", timestamp: new Date()) )
@@ -154,16 +153,16 @@ class ConsumerSpec extends Specification {
         consumer.addToMessages(new Message(fromUsername: "User5",  content: "This is a message", timestamp: new Date()) )
 
         then:
-        assertFalse consumer.validate()
-        assertTrue consumer.errors.hasFieldErrors('province')
+        assertFalse consumer.user.validate()
+        assertTrue consumer.user.errors.hasFieldErrors('province')
     }
 
     void "test create consumer fails when country is null"() {
 
         when:
 
-        Consumer consumer = new Consumer(user: User.build(), firstname: "Jay", lastname: "Logelin", address: "421 Vanier Street", city: "Dieppe",
-                province: "NB", email: "jay.logelin@gmail.com", latitude: 12, longitude: 12, driveway: new Driveway(length: 100, width: 75))
+        Consumer consumer = new Consumer(user: new User( username: "jay", password: "jay", firstname: "Jay", lastname: "Logelin", address: "421 Vanier Street", city: "Dieppe",
+                province: "NB", email: "jay.logelin@gmail.com", latitude: 12, longitude: 12), driveway: new Driveway(length: 100, width: 75))
 
         consumer.addToMessages(new Message(fromUsername: "User1",  content: "This is a message", timestamp: new Date()) )
         consumer.addToMessages(new Message(fromUsername: "User2",  content: "This is a message", timestamp: new Date()) )
@@ -172,16 +171,16 @@ class ConsumerSpec extends Specification {
         consumer.addToMessages(new Message(fromUsername: "User5",  content: "This is a message", timestamp: new Date()) )
 
         then:
-        assertFalse consumer.validate()
-        assertTrue consumer.errors.hasFieldErrors('country')
+        assertFalse consumer.user.validate()
+        assertTrue consumer.user.errors.hasFieldErrors('country')
     }
 
     void "test create consumer fails when country is not Canada or United States"() {
 
         when:
 
-        Consumer consumer = new Consumer(user: User.build(), firstname: "Jay", lastname: "Logelin", address: "421 Vanier Street", city: "Dieppe",
-                province: "NB", country: "United Kingdom", email: "jay.logelin@gmail.com", latitude: 12, longitude: 12, driveway: new Driveway(length: 100, width: 75))
+        Consumer consumer = new Consumer(user: new User( username: "jay", password: "jay", firstname: "Jay", lastname: "Logelin", address: "421 Vanier Street", city: "Dieppe",
+                province: "NB", email: "jay.logelin@gmail.com", country: "Spain", latitude: 12, longitude: 12), driveway: new Driveway(length: 100, width: 75))
 
         consumer.addToMessages(new Message(fromUsername: "User1",  content: "This is a message", timestamp: new Date()) )
         consumer.addToMessages(new Message(fromUsername: "User2",  content: "This is a message", timestamp: new Date()) )
@@ -190,16 +189,16 @@ class ConsumerSpec extends Specification {
         consumer.addToMessages(new Message(fromUsername: "User5",  content: "This is a message", timestamp: new Date()) )
 
         then:
-        assertFalse consumer.validate()
-        assertTrue consumer.errors.hasFieldErrors('country')
+        assertFalse consumer.user.validate()
+        assertTrue consumer.user.errors.hasFieldErrors('country')
     }
 
     void "test create consumer fails when driveway is null"() {
 
         when:
 
-        Consumer consumer = new Consumer(user: User.build(), firstname: "Jay", lastname: "Logelin", address: "421 Vanier Street", city: "Dieppe",
-                province: "NB", email: "jay.logelin@gmail.com", country: "Canada", latitude: 12, longitude: 12)
+        Consumer consumer = new Consumer(user: new User( username: "jay", password: "jay", firstname: "Jay", lastname: "Logelin", address: "421 Vanier Street", city: "Dieppe",
+                province: "NB", email: "jay.logelin@gmail.com", country: "Canada", latitude: 12, longitude: 12))
 
         consumer.addToMessages(new Message(fromUsername: "User1",  content: "This is a message", timestamp: new Date()) )
         consumer.addToMessages(new Message(fromUsername: "User2",  content: "This is a message", timestamp: new Date()) )
@@ -211,7 +210,5 @@ class ConsumerSpec extends Specification {
         assertFalse consumer.validate()
         assertTrue consumer.errors.hasFieldErrors('driveway')
     }
-
-
 
 }

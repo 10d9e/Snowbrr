@@ -11,8 +11,7 @@ class ProviderControllerSpec extends Specification {
 
     def populateValidParams(params) {
         assert params != null
-        params << [user: User.build(), firstname: "Maryse", lastname: "Arseneau", address: "421 Vanier Street", city: "Dieppe",
-        province: "NB", email: "maryse.g.arseneau@gmail.com", country: "Canada", latitude: 12, longitude: 12, companyName: "Snow Blowers Inc"]
+        params << [user: User.build(username: 'user-' + new Date()), companyName: "Snow Blowers Inc"]
     }
 
     void "Test the index action returns the correct model"() {

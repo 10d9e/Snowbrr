@@ -19,10 +19,10 @@ class BootStrap {
         User admin = new User('admin', 'admin').save()
         UserRole.create admin, adminRole, true
 
-        User jay = new User('jay', 'jay').save()
+        User jay = new User(username:'jay', password:'jay', firstname: "Jay", lastname: "Logelin", address: "421 Vanier Street", city: "Dieppe",
+                province: "NB", email: "jay.logelin@gmail.com", country: "Canada", latitude: 12, longitude: 12).save()
         UserRole.create jay, consumerRole, true
-        Consumer consumer = new Consumer(user: jay, firstname: "Jay", lastname: "Logelin", address: "421 Vanier Street", city: "Dieppe",
-               province: "NB", email: "jay.logelin@gmail.com", country: "Canada", latitude: 12, longitude: 12, driveway: new Driveway(length: 100, width: 75))
+        Consumer consumer = new Consumer(user: jay, driveway: new Driveway(length: 100, width: 75))
 
         consumer.addToMessages(new Message(fromUsername: "User1",  content: "This is a message", timestamp: new Date()) )
         consumer.addToMessages(new Message(fromUsername: "User2",  content: "This is a message", timestamp: new Date()) )
@@ -33,10 +33,10 @@ class BootStrap {
         save consumer
 
 
-        User maryse = new User('maryse', 'maryse').save()
+        User maryse = new User(username:'maryse', password:'maryse', firstname: "Maryse", lastname: "Arseneau", address: "421 Vanier Street", city: "Dieppe",
+                province: "NB", email: "maryse.g.arseneau@gmail.com", country: "Canada", latitude: 12, longitude: 12).save()
         UserRole.create maryse, providerRole, true
-        Provider provider = new Provider(user: maryse, firstname: "Maryse", lastname: "Arseneau", address: "421 Vanier Street", city: "Dieppe",
-                province: "NB", email: "maryse.g.arseneau@gmail.com", country: "Canada", latitude: 12, longitude: 12, companyName: "Snow Blowers Inc")
+        Provider provider = new Provider(user: maryse, companyName: "Snow Blowers Inc")
 
         provider.addToMessages(new Message(fromUsername: "User1",  content: "This is a message", timestamp: new Date()) )
         provider.addToMessages(new Message(fromUsername: "User2",  content: "This is a message", timestamp: new Date()) )

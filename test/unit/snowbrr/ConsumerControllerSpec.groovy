@@ -11,8 +11,7 @@ class ConsumerControllerSpec extends Specification {
 
     def populateValidParams(params) {
         assert params != null
-        params << [user: User.build(username: 'user-' + new Date()), firstname: "Jay", lastname: "Logelin", address: "421 Vanier Street", city: "Dieppe",
-                province: "NB", email: "jay.logelin@gmail.com", country: "Canada", latitude: 12, longitude: 12, driveway: Driveway.build() ]
+        params << [user: User.build(username: 'user-' + new Date()), driveway: Driveway.build() ]
     }
 
     void "Test the index action returns the correct model"() {
