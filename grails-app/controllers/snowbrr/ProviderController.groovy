@@ -1,5 +1,6 @@
 package snowbrr
 
+import grails.converters.JSON
 import grails.plugin.springsecurity.annotation.Secured
 
 import static org.springframework.http.HttpStatus.*
@@ -11,6 +12,8 @@ import grails.transaction.Transactional
 class ProviderController {
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
+
+    def providerService
 
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
@@ -24,6 +27,11 @@ class ProviderController {
     def create() {
         respond new Provider(params)
     }
+
+    def list() {
+        render providerService.listProviders() as JSON
+    }
+
 
     @Transactional
     def save(Provider providerInstance) {

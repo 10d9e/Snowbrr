@@ -16,6 +16,10 @@ class ConsumerController {
         respond Consumer.list(params), model: [consumerInstanceCount: Consumer.count()]
     }
 
+    def map(Integer max) {
+        index(max)
+    }
+
     def show(Consumer consumerInstance) {
         respond consumerInstance
     }

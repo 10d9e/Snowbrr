@@ -14,5 +14,4 @@ class Provider {
         user nullable: false
         companyName nullable: false
     }
-
 }

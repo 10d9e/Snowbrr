@@ -32,6 +32,8 @@ class User implements Serializable {
 
 	String country
 
+	String phone
+
 	double latitude
 
 	double longitude
@@ -77,6 +79,7 @@ class User implements Serializable {
 		avatar(nullable:true, maxSize: 5242880 )
 		latitude nullable: false
 		longitude nullable: false
+		phone nullable: true, phone: true
 	}
 
 	static mapping = {
