@@ -19,6 +19,9 @@ class BootStrap {
         User admin = new User('admin', 'admin').save()
         UserRole.create admin, adminRole, true
 
+        setupConsumers(consumerRole)
+        setupProviders(providerRole)
+
         User jay = new User(username:'jay', password:'jay', firstname: "Jay", lastname: "Logelin", address: "421 Vanier Street", city: "Dieppe",
                 province: "NB", email: "jay.logelin@gmail.com", country: "Canada", latitude: 12, longitude: 12).save()
         UserRole.create jay, consumerRole, true
@@ -42,13 +45,16 @@ class BootStrap {
         provider.addToMessages(new Message(fromUsername: "User3",  content: "This is a message", timestamp: new Date()) )
         provider.addToMessages(new Message(fromUsername: "User4",  content: "This is a message", timestamp: new Date()) )
         provider.addToMessages(new Message(fromUsername: "User5",  content: "This is a message", timestamp: new Date()) )
-        provider.addToReviews( [reviewer: consumer, timestamp: new Date(), rating: 4, content: "Customer was great, cars were moved and customer was very nice."] )
+
+        Consumer.list().each {
+            provider.addToReviews([reviewer: it, timestamp: new Date(), rating: randomInt([0..5]), title: 'Awesome!', content: "Maryse was great, cars were moved and she was very nice."])
+        }
 
         save provider
 
         UserRole.create consumer.user, providerRole, true
 
-        consumer.addToReviews( new ConsumerReview( reviewer:provider, timestamp: new Date(), rating: 4, content: "Did a great job, I can see my pavement again!" ) )
+        consumer.addToReviews( new ConsumerReview( reviewer:provider, timestamp: new Date(), rating: randomInt([0..5]), title: 'Awesome!', content: "Did a great job, I can see my pavement again!" ) )
 
         save provider
         save consumer
@@ -57,8 +63,60 @@ class BootStrap {
             Transaction transaction = new Transaction(consumer: consumer, provider: provider, price: 50, status: "in progress", finishBy: new Date(), consumerNotes: "I would like to have this done before the big storm")
             save transaction
         }
+    }
 
-        setupProviders(providerRole)
+    def setupConsumers(def consumerRole) {
+
+        User user = new User(username: 'homer', password: 'homer', firstname: "Homer", lastname: "Simpson", address: "742 Evergreen Terrace", city: "Springfield",
+                province: "SK", email: "ChunkyLover53@aol.com", country: "United States", latitude: 46.078731, longitude: -64.712379, phone: '506-555-6832').save()
+        Consumer consumer = new Consumer(user: user, driveway: new Driveway(length: 100, width: 75))
+        consumer.addToMessages(new Message(fromUsername: "User1",  content: "This is a message", timestamp: new Date()) )
+        consumer.addToMessages(new Message(fromUsername: "User2",  content: "This is a message", timestamp: new Date()) )
+        consumer.addToMessages(new Message(fromUsername: "User3",  content: "This is a message", timestamp: new Date()) )
+        consumer.addToMessages(new Message(fromUsername: "User4",  content: "This is a message", timestamp: new Date()) )
+        consumer.addToMessages(new Message(fromUsername: "User5",  content: "This is a message", timestamp: new Date()) )
+        save consumer
+
+        user = new User(username: 'marge', password: 'marge', firstname: "Marge", lastname: "Simpson", address: "742 Evergreen Terrace", city: "Springfield",
+                province: "SK", email: "marge@aol.com", country: "United States", latitude: 46.078731, longitude: -64.712379, phone: '506-555-6832').save()
+        consumer = new Consumer(user: user, driveway: new Driveway(length: 100, width: 75))
+        consumer.addToMessages(new Message(fromUsername: "User1",  content: "This is a message", timestamp: new Date()) )
+        consumer.addToMessages(new Message(fromUsername: "User2",  content: "This is a message", timestamp: new Date()) )
+        consumer.addToMessages(new Message(fromUsername: "User3",  content: "This is a message", timestamp: new Date()) )
+        consumer.addToMessages(new Message(fromUsername: "User4",  content: "This is a message", timestamp: new Date()) )
+        consumer.addToMessages(new Message(fromUsername: "User5",  content: "This is a message", timestamp: new Date()) )
+        save consumer
+
+        user = new User(username: 'lisa', password: 'lisa', firstname: "Lisa", lastname: "Simpson", address: "742 Evergreen Terrace", city: "Springfield",
+                province: "SK", email: "lisa@aol.com", country: "United States", latitude: 46.078731, longitude: -64.712379, phone: '506-555-6832').save()
+        consumer = new Consumer(user: user, driveway: new Driveway(length: 100, width: 75))
+        consumer.addToMessages(new Message(fromUsername: "User1",  content: "This is a message", timestamp: new Date()) )
+        consumer.addToMessages(new Message(fromUsername: "User2",  content: "This is a message", timestamp: new Date()) )
+        consumer.addToMessages(new Message(fromUsername: "User3",  content: "This is a message", timestamp: new Date()) )
+        consumer.addToMessages(new Message(fromUsername: "User4",  content: "This is a message", timestamp: new Date()) )
+        consumer.addToMessages(new Message(fromUsername: "User5",  content: "This is a message", timestamp: new Date()) )
+        save consumer
+
+        user = new User(username: 'bart', password: 'bart', firstname: "Bart", lastname: "Simpson", address: "742 Evergreen Terrace", city: "Springfield",
+                province: "SK", email: "bart@aol.com", country: "United States", latitude: 46.078731, longitude: -64.712379, phone: '506-555-6832').save()
+        consumer = new Consumer(user: user, driveway: new Driveway(length: 100, width: 75))
+        consumer.addToMessages(new Message(fromUsername: "User1",  content: "This is a message", timestamp: new Date()) )
+        consumer.addToMessages(new Message(fromUsername: "User2",  content: "This is a message", timestamp: new Date()) )
+        consumer.addToMessages(new Message(fromUsername: "User3",  content: "This is a message", timestamp: new Date()) )
+        consumer.addToMessages(new Message(fromUsername: "User4",  content: "This is a message", timestamp: new Date()) )
+        consumer.addToMessages(new Message(fromUsername: "User5",  content: "This is a message", timestamp: new Date()) )
+        save consumer
+
+        user = new User(username: 'maggie', password: 'maggie', firstname: "Maggie", lastname: "Simpson", address: "742 Evergreen Terrace", city: "Springfield",
+                province: "SK", email: "maggie@aol.com", country: "United States", latitude: 46.078731, longitude: -64.712379, phone: '506-555-6832').save()
+        consumer = new Consumer(user: user, driveway: new Driveway(length: 100, width: 75))
+        consumer.addToMessages(new Message(fromUsername: "User1",  content: "This is a message", timestamp: new Date()) )
+        consumer.addToMessages(new Message(fromUsername: "User2",  content: "This is a message", timestamp: new Date()) )
+        consumer.addToMessages(new Message(fromUsername: "User3",  content: "This is a message", timestamp: new Date()) )
+        consumer.addToMessages(new Message(fromUsername: "User4",  content: "This is a message", timestamp: new Date()) )
+        consumer.addToMessages(new Message(fromUsername: "User5",  content: "This is a message", timestamp: new Date()) )
+        save consumer
+
     }
 
     def setupProviders(def providerRole){
@@ -99,6 +157,21 @@ class BootStrap {
         provider.addToMessages(new Message(fromUsername: "User2", content: "This is a message", timestamp: new Date()))
         save provider
 
+    }
+
+    static def r = new Random()
+
+    private static int randomInt(int max){
+        r.nextInt(max)
+    }
+
+    private static int randomInt(Range<Integer> range) {
+        range.from + r.nextInt(range.to - range.from + 1)
+    }
+
+
+    private static Date randomDate(Range<Date> range) {
+        range.from + r.nextInt(range.to - range.from + 1)
     }
 
     def destroy = {

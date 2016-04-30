@@ -8,6 +8,8 @@ class ProviderReview {
 
     int rating
 
+    String title
+
     String content
 
     static belongsTo = [provider: Provider]
@@ -17,5 +19,6 @@ class ProviderReview {
         rating range: 0..5, nullable: false
         reviewer unique: true
         content nullable: true
+        title nullable: true
     }
 }

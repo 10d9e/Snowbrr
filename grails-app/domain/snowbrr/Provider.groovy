@@ -4,7 +4,7 @@ class Provider {
 
     String companyName
 
-    boolean active = false
+    boolean active = true
 
     User user
 

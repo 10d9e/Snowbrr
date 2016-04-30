@@ -7,7 +7,6 @@ import grails.transaction.Transactional
 
 @Transactional(readOnly = true)
 @Secured(['ROLE_CONSUMER', 'ROLE_PROVIDER'])
-
 class TransactionController {
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]

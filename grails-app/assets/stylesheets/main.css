@@ -32,15 +32,11 @@ html.no-cssgradients {
 	height: 100%;
 }
 
-html * {
-	margin: 0;
-}
-
 body {
 	background: #ffffff;
 	color: #333333;
 	margin: 0 auto;
-	max-width: 960px;
+	//max-width: 960px;
 	overflow-x: hidden; /* prevents box-shadow causing a horizontal scrollbar in firefox when viewport < 960px wide */
 	   -moz-box-shadow: 0 0 0.3em #255b17;
 	-webkit-box-shadow: 0 0 0.3em #255b17;
@@ -48,7 +44,7 @@ body {
 }
 
 #grailsLogo {
-	background-color: #abbf78;
+	background-color: #ABC3D8;
 }
 
 /* replace with .no-boxshadow body if you have modernizr available */
@@ -65,7 +61,7 @@ body {
 }
 
 a:link, a:visited, a:hover {
-	color: #48802c;
+	color: #2E6DA4;
 }
 
 a:hover, a:active {
@@ -73,7 +69,7 @@ a:hover, a:active {
 }
 
 h1 {
-	color: #48802c;
+	color: #2E6DA4;
 	font-weight: normal;
 	font-size: 1.25em;
 	margin: 0.8em 0 0.3em 0;
@@ -107,19 +103,7 @@ img {
 	border: none;
 }
 
-.footer {
-	background: #abbf78;
-	color: #000;
-	clear: both;
-	font-size: 0.8em;
-	margin-top: 1.5em;
-	padding: 1em;
-	min-height: 1em;
-}
 
-.footer a {
-	color: #255b17;
-}
 
 .spinner {
 	background: url(../images/spinner.gif) 50% 50% no-repeat transparent;
@@ -134,13 +118,8 @@ img {
 
 /* NAVIGATION MENU */
 
-.nav {
-	background-color: #efefef;
-	padding: 0.5em 0.75em;
-	   -moz-box-shadow: 0 0 3px 1px #aaaaaa;
-	-webkit-box-shadow: 0 0 3px 1px #aaaaaa;
-	        box-shadow: 0 0 3px 1px #aaaaaa;
-	zoom: 1;
+.navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.open>a {
+
 }
 
 .nav ul {
@@ -162,9 +141,7 @@ img {
 	display: block;
 	padding: 0.25em 0.7em;
 	text-decoration: none;
-	   -moz-border-radius: 0.3em;
-	-webkit-border-radius: 0.3em;
-	        border-radius: 0.3em;
+
 }
 
 .nav a:active, .nav a:visited {
@@ -172,10 +149,9 @@ img {
 }
 
 .nav a:focus, .nav a:hover {
-	background-color: #999999;
+	background-color: #B6C5D2;
 	color: #ffffff;
-	outline: none;
-	text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.8);
+
 }
 
 .no-borderradius .nav a:focus, .no-borderradius .nav a:hover {
@@ -183,6 +159,7 @@ img {
 	color: #444444;
 	text-decoration: underline;
 }
+
 
 .nav a.home, .nav a.list, .nav a.create {
 	background-position: 0.7em center;
@@ -227,7 +204,7 @@ fieldset,
 .fieldcontain .property-label {
 	color: #666666;
 	text-align: right;
-	width: 25%;
+	width: 45%;
 }
 
 .fieldcontain .property-label {
@@ -236,7 +213,11 @@ fieldset,
 
 .fieldcontain .property-value {
 	display: block;
-	margin-left: 27%;
+	margin-left: 47%;
+}
+
+.property-value {
+	font-weight: bolder;
 }
 
 label {
@@ -283,7 +264,7 @@ input:focus, select:focus, textarea:focus {
 }
 
 .required-indicator {
-	color: #48802C;
+	color: #2E6DA4;
 	display: inline-block;
 	font-weight: bold;
 	margin-left: 0.3em;

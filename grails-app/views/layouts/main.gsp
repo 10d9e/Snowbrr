@@ -20,6 +20,7 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 		<asset:stylesheet src="responsive.css" />
+		<asset:stylesheet src="main.css" />
 		<g:layoutHead/>
 	</head>
 	<body>
@@ -38,9 +39,7 @@
 
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav">
-					<li ${controllerName == 'gameStats' && actionName == 'leaderboard' ? 'class=active' : ''}><g:link controller="gameStats" action="leaderboard">Leaderboard</g:link></li>
-					<li ${controllerName == 'season' && actionName == 'showStandings' ? 'class=active' : ''}><g:link controller="season" action="showStandings" id="1">Standings</g:link></li>
-					<li ${controllerName == 'person' && actionName == 'index' ? 'class=active' : ''}><g:link controller="person" action="index">Players</g:link></li>
+					<li ${controllerName == 'provider' && actionName == 'index' ? 'class=active' : ''}><g:link controller="provider" action="index">Providers</g:link></li>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
 					<sec:ifNotLoggedIn>
