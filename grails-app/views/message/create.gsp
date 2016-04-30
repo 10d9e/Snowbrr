@@ -1,44 +1,88 @@
-<!DOCTYPE html>
+
+<%@ page import="snowbrr.Message" %>
 <html>
-<head>
-    <meta name="layout" content="main">
-    <g:set var="entityName" value="${message(code: 'message.label', default: 'Message')}"/>
-    <title><g:message code="default.create.label" args="[entityName]"/></title>
-</head>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta name="layout" content="main" />
+        <title><g:message code="message.create" default="Create Message" /></title>
+    </head>
+    <body>
+        <div class="nav">
+            <span class="menuButton"><a class="home" href="${createLinkTo(dir: '')}"><g:message code="home" default="Home" /></a></span>
+            <span class="menuButton"><g:link class="list" action="list"><g:message code="message.list" default="Message List" /></g:link></span>
+        </div>
+        <div class="body">
+            <h1><g:message code="message.create" default="Create Message" /></h1>
+            <g:if test="${flash.message}">
+            <div class="message"><g:message code="${flash.message}" args="${flash.args}" default="${flash.defaultMessage}" /></div>
+            </g:if>
+            <g:hasErrors bean="${messageInstance}">
+            <div class="errors">
+                <g:renderErrors bean="${messageInstance}" as="list" />
+            </div>
+            </g:hasErrors>
+            <g:form action="save" method="post" >
+                <div class="dialog">
+                    <table>
+                        <tbody>
+                        
+                            <tr class="prop">
+                                <td valign="top" class="name">
+                                    <label for="timestamp"><g:message code="message.timestamp" default="Timestamp" />:</label>
+                                </td>
+                                <td valign="top" class="value ${hasErrors(bean: messageInstance, field: 'timestamp', 'errors')}">
+                                    <g:datePicker name="timestamp" value="${messageInstance?.timestamp}"  />
 
-<body>
-<a href="#create-message" class="skip" tabindex="-1"><g:message code="default.link.skip.label"
-                                                                default="Skip to content&hellip;"/></a>
+                                </td>
+                            </tr>
+                        
+                            <tr class="prop">
+                                <td valign="top" class="name">
+                                    <label for="from"><g:message code="message.from" default="From" />:</label>
+                                </td>
+                                <td valign="top" class="value ${hasErrors(bean: messageInstance, field: 'from', 'errors')}">
+                                    <g:select name="from.id" from="${snowbrr.User.list()}" optionKey="id" value="${messageInstance?.from?.id}"  />
 
-<div class="nav" role="navigation">
-    <ul>
-        <li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
-        <li><g:link class="list" action="index"><g:message code="default.list.label" args="[entityName]"/></g:link></li>
-    </ul>
-</div>
+                                </td>
+                            </tr>
+                        
+                            <tr class="prop">
+                                <td valign="top" class="name">
+                                    <label for="content"><g:message code="message.content" default="Content" />:</label>
+                                </td>
+                                <td valign="top" class="value ${hasErrors(bean: messageInstance, field: 'content', 'errors')}">
+                                    <g:textField name="content" value="${fieldValue(bean: messageInstance, field: 'content')}" />
 
-<div id="create-message" class="content scaffold-create" role="main">
-    <h1><g:message code="default.create.label" args="[entityName]"/></h1>
-    <g:if test="${flash.message}">
-        <div class="message" role="status">${flash.message}</div>
-    </g:if>
-    <g:hasErrors bean="${messageInstance}">
-        <ul class="errors" role="alert">
-            <g:eachError bean="${messageInstance}" var="error">
-                <li <g:if test="${error in org.springframework.validation.FieldError}">data-field-id="${error.field}"</g:if>><g:message
-                        error="${error}"/></li>
-            </g:eachError>
-        </ul>
-    </g:hasErrors>
-    <g:form url="[resource: messageInstance, action: 'save']">
-        <fieldset class="form">
-            <g:render template="form"/>
-        </fieldset>
-        <fieldset class="buttons">
-            <g:submitButton name="create" class="save"
-                            value="${message(code: 'default.button.create.label', default: 'Create')}"/>
-        </fieldset>
-    </g:form>
-</div>
-</body>
+                                </td>
+                            </tr>
+                        
+                            <tr class="prop">
+                                <td valign="top" class="name">
+                                    <label for="read"><g:message code="message.read" default="Read" />:</label>
+                                </td>
+                                <td valign="top" class="value ${hasErrors(bean: messageInstance, field: 'read', 'errors')}">
+                                    <g:checkBox name="read" value="${messageInstance?.read}" />
+
+                                </td>
+                            </tr>
+                        
+                            <tr class="prop">
+                                <td valign="top" class="name">
+                                    <label for="user"><g:message code="message.user" default="User" />:</label>
+                                </td>
+                                <td valign="top" class="value ${hasErrors(bean: messageInstance, field: 'user', 'errors')}">
+                                    <g:select name="user.id" from="${snowbrr.User.list()}" optionKey="id" value="${messageInstance?.user?.id}"  />
+
+                                </td>
+                            </tr>
+                        
+                        </tbody>
+                    </table>
+                </div>
+                <div class="buttons">
+                    <span class="button"><g:submitButton name="create" class="save" value="${message(code: 'create', 'default': 'Create')}" /></span>
+                </div>
+            </g:form>
+        </div>
+    </body>
 </html>

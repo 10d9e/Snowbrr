@@ -22,6 +22,37 @@
 		<asset:stylesheet src="responsive.css" />
 		<asset:stylesheet src="main.css" />
 		<g:layoutHead/>
+
+		<script>
+			$( document ).ready(function() {
+
+				function update() {
+					$.getJSON("${g.createLink(controller:'message',action:'unread')}", function(data){
+						if( data <= 0 ){
+							$('#unread').hide()
+						}else {
+							$('#unread').show()
+							$('#unread').text(data);
+						}
+					});
+
+					$.getJSON("${g.createLink(controller:'transaction',action:'active')}", function(data){
+						if( data <= 0 ){
+							$('#trans').hide()
+						}else {
+							$('#trans').show()
+							$('#trans').text(data);
+						}
+					});
+
+				}
+
+				update();
+
+				setInterval(update, 5000);
+			});
+		</script>
+
 	</head>
 	<body>
 	<!-- responsive navbar -->
@@ -40,13 +71,32 @@
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav">
 					<li ${controllerName == 'provider' && actionName == 'index' ? 'class=active' : ''}><g:link controller="provider" action="index">Providers</g:link></li>
+					<li ${controllerName == 'transaction' && actionName == 'index' ? 'class=active' : ''}>
+						<g:link controller="transaction" action="index">
+							My Transactions
+							<span id="trans" class="badge"></span>
+						</g:link>
+					</li>
+					<li ${controllerName == 'message' && actionName == 'index' ? 'class=active' : ''}>
+						<g:link controller="message" action="index">
+							Messages
+							<span id="unread" class="badge"></span>
+						</g:link>
+					</li>
+
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
 					<sec:ifNotLoggedIn>
 						<li> <g:link controller="login" action="auth">Login</g:link>  </li>
 					</sec:ifNotLoggedIn>
 					<sec:ifLoggedIn>
-						<li> <a id="greet">Hello, <sec:username/>!</a>  </li>
+
+						<li><a id="greet">Hello, <sec:username/>!
+							<sec:ifAllGranted roles="ROLE_PROVIDER">
+								<span class="label label-primary">Provider</span>
+							</sec:ifAllGranted>
+							</a>
+						</li>
 						<li> <g:remoteLink id="logout" class="logout" controller="logout" method="post" asynchronous="false" onSuccess="location.reload()">Logout</g:remoteLink> </li>
 					</sec:ifLoggedIn>
 				</ul>

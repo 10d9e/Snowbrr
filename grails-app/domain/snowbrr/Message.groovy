@@ -4,14 +4,16 @@ class Message {
 
     String content
 
-    String fromUsername
+    User from
 
     boolean read = false
 
     Date timestamp
 
+    static belongsTo = [user: User]
+
     static constraints = {
         timestamp nullable: false
-        fromUsername nullable: false
+        from nullable: false
     }
 }

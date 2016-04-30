@@ -34,15 +34,6 @@
             <g:sortableColumn property="finishBy"
                               title="${message(code: 'transaction.finishBy.label', default: 'Finish By')}"/>
 
-            <g:sortableColumn property="photoProof"
-                              title="${message(code: 'transaction.photoProof.label', default: 'Photo Proof')}"/>
-
-            <g:sortableColumn property="providerNotes"
-                              title="${message(code: 'transaction.providerNotes.label', default: 'Provider Notes')}"/>
-
-            <g:sortableColumn property="consumerNotes"
-                              title="${message(code: 'transaction.consumerNotes.label', default: 'Consumer Notes')}"/>
-
             <th><g:message code="transaction.provider.label" default="Provider"/></th>
 
         </tr>
@@ -56,13 +47,7 @@
 
                 <td><g:formatDate date="${transactionInstance.finishBy}"/></td>
 
-                <td>${fieldValue(bean: transactionInstance, field: "photoProof")}</td>
-
-                <td>${fieldValue(bean: transactionInstance, field: "providerNotes")}</td>
-
-                <td>${fieldValue(bean: transactionInstance, field: "consumerNotes")}</td>
-
-                <td>${fieldValue(bean: transactionInstance, field: "provider")}</td>
+                <td>${fieldValue(bean: transactionInstance.provider, field: "companyName")}</td>
 
             </tr>
         </g:each>

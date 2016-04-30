@@ -86,7 +86,7 @@
 
                 <span class="property-value" aria-labelledby="provider-label"><g:link controller="provider"
                                                                                       action="show"
-                                                                                      id="${transactionInstance?.provider?.id}">${transactionInstance?.provider?.encodeAsHTML()}</g:link></span>
+                                                                                      id="${transactionInstance?.provider?.id}">${transactionInstance?.provider?.companyName}</g:link></span>
 
             </li>
         </g:if>
@@ -98,7 +98,7 @@
 
                 <span class="property-value" aria-labelledby="consumer-label"><g:link controller="consumer"
                                                                                       action="show"
-                                                                                      id="${transactionInstance?.consumer?.id}">${transactionInstance?.consumer?.encodeAsHTML()}</g:link></span>
+                                                                                      id="${transactionInstance?.consumer?.id}">${transactionInstance?.consumer?.user?.firstname} ${transactionInstance?.consumer?.user?.lastname} </g:link></span>
 
             </li>
         </g:if>
@@ -117,6 +117,29 @@
     </ol>
     <g:form url="[resource: transactionInstance, action: 'delete']" method="DELETE">
         <fieldset class="buttons">
+            <sec:ifAllGranted roles="ROLE_PROVIDER">
+                <g:link class="edit" action="providerAccept" resource="${transactionInstance}">
+                    <g:message code="default.button.provider.accept.label" default="Accept Job"/></g:link>
+
+                <g:link class="edit" action="providerComplete" resource="${transactionInstance}">
+                    <g:message code="default.button.provider.complete.label" default="Complete Job"/></g:link>
+
+                <g:link class="edit" action="providerCancel" resource="${transactionInstance}">
+                    <g:message code="default.button.provider.complete.label" default="Cancel Job"/></g:link>
+
+                <g:link class="edit" action="create" controller="consumerReview" params="[reviewer:transactionInstance.provider.id,consumer:transactionInstance.consumer.id]" >
+                    <g:message code="default.button.provider.complete.label" default="Rate Client"/></g:link>
+
+            </sec:ifAllGranted>
+
+            <sec:ifAllGranted roles="ROLE_CONSUMER">
+                <g:link class="edit" action="consumerCancel" resource="${transactionInstance}">
+                    <g:message code="default.button.provider.complete.label" default="Cancel Job"/></g:link>
+
+                <g:link class="edit" action="create" controller="providerReview" params="[reviewer:transactionInstance.consumer.id,provider:transactionInstance.provider.id]" >
+                    <g:message code="default.button.provider.complete.label" default="Rate Provider"/></g:link>
+            </sec:ifAllGranted>
+
             <g:link class="edit" action="edit" resource="${transactionInstance}"><g:message
                     code="default.button.edit.label" default="Edit"/></g:link>
             <g:actionSubmit class="delete" action="delete"

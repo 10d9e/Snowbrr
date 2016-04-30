@@ -227,11 +227,11 @@
 									</li>
 								</g:if>
 
-								<g:if test="${providerInstance?.messages}">
+								<g:if test="${providerInstance?.user?.messages}">
 									<li class="fieldcontain">
 										<span id="messages-label" class="property-label"><g:message code="provider.messages.label" default="Messages" /></span>
 
-										<g:each in="${providerInstance.messages}" var="m">
+										<g:each in="${providerInstance?.user.messages}" var="m">
 											<span class="property-value" aria-labelledby="messages-label"><g:link controller="message" action="show" id="${m.id}">${m?.encodeAsHTML()}</g:link></span>
 										</g:each>
 
@@ -240,11 +240,11 @@
 
 
 
-								<g:if test="${providerInstance?.transactions}">
+								<g:if test="${providerInstance?.user?.transactions}">
 									<li class="fieldcontain">
 										<span id="transactions-label" class="property-label"><g:message code="provider.transactions.label" default="Transactions" /></span>
 
-										<g:each in="${providerInstance.transactions}" var="t">
+										<g:each in="${providerInstance?.user.transactions}" var="t">
 											<span class="property-value" aria-labelledby="transactions-label"><g:link controller="transaction" action="show" id="${t.id}">${t?.encodeAsHTML()}</g:link></span>
 										</g:each>
 

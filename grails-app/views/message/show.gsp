@@ -1,86 +1,58 @@
+
 <%@ page import="snowbrr.Message" %>
-<!DOCTYPE html>
 <html>
-<head>
-    <meta name="layout" content="main">
-    <g:set var="entityName" value="${message(code: 'message.label', default: 'Message')}"/>
-    <title><g:message code="default.show.label" args="[entityName]"/></title>
-</head>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta name="layout" content="main" />
+        <title><g:message code="message.show" default="Show Message" /></title>
+    </head>
+    <body>
+        <div class="nav">
+            <span class="menuButton"><a class="home" href="${createLinkTo(dir: '')}"><g:message code="home" default="Home" /></a></span>
+            <span class="menuButton"><g:link class="list" action="list"><g:message code="message.list" default="Message List" /></g:link></span>
+            <span class="menuButton"><g:link class="create" action="create"><g:message code="message.new" default="New Message" /></g:link></span>
+        </div>
+        <div class="body">
+            <h1><g:message code="message.show" default="Show Message" /></h1>
+            <g:if test="${flash.message}">
+            <div class="message"><g:message code="${flash.message}" args="${flash.args}" default="${flash.defaultMessage}" /></div>
+            </g:if>
+            <g:form>
+                <g:hiddenField name="id" value="${messageInstance?.id}" />
+                <div class="dialog">
+                    <table>
+                        <tbody>
 
-<body>
-<a href="#show-message" class="skip" tabindex="-1"><g:message code="default.link.skip.label"
-                                                              default="Skip to content&hellip;"/></a>
+                            
+                            <tr class="prop">
+                                <td valign="top" class="name"><g:message code="message.timestamp" default="Timestamp" />:</td>
+                                
+                                <td valign="top" class="value"><g:formatDate date="${messageInstance?.timestamp}" /></td>
+                                
+                            </tr>
+                            
+                            <tr class="prop">
+                                <td valign="top" class="name"><g:message code="message.from" default="From" />:</td>
+                                
+                                <td valign="top" class="value"><g:link controller="user" action="show" id="${messageInstance?.from?.id}">${messageInstance?.from?.username} ( ${messageInstance?.from?.firstname} ${messageInstance?.from?.lastname} ) </g:link></td>
+                                
+                            </tr>
 
-<div class="nav" role="navigation">
-    <ul>
-        <li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
-        <li><g:link class="list" action="index"><g:message code="default.list.label" args="[entityName]"/></g:link></li>
-        <li><g:link class="create" action="create"><g:message code="default.new.label"
-                                                              args="[entityName]"/></g:link></li>
-    </ul>
-</div>
+                            <tr class="prop">
+                                <td valign="top" class="name"><g:message code="message.content" default="Content" />:</td>
 
-<div id="show-message" class="content scaffold-show" role="main">
-    <h1><g:message code="default.show.label" args="[entityName]"/></h1>
-    <g:if test="${flash.message}">
-        <div class="message" role="status">${flash.message}</div>
-    </g:if>
-    <ol class="property-list message">
+                                <td valign="top" class="value">${fieldValue(bean: messageInstance, field: "content")}</td>
 
-        <g:if test="${messageInstance?.timestamp}">
-            <li class="fieldcontain">
-                <span id="timestamp-label" class="property-label"><g:message code="message.timestamp.label"
-                                                                             default="Timestamp"/></span>
-
-                <span class="property-value" aria-labelledby="timestamp-label"><g:formatDate
-                        date="${messageInstance?.timestamp}"/></span>
-
-            </li>
-        </g:if>
-
-        <g:if test="${messageInstance?.fromUsername}">
-            <li class="fieldcontain">
-                <span id="fromUsername-label" class="property-label"><g:message code="message.fromUsername.label"
-                                                                                default="From Username"/></span>
-
-                <span class="property-value" aria-labelledby="fromUsername-label"><g:fieldValue
-                        bean="${messageInstance}" field="fromUsername"/></span>
-
-            </li>
-        </g:if>
-
-        <g:if test="${messageInstance?.content}">
-            <li class="fieldcontain">
-                <span id="content-label" class="property-label"><g:message code="message.content.label"
-                                                                           default="Content"/></span>
-
-                <span class="property-value" aria-labelledby="content-label"><g:fieldValue bean="${messageInstance}"
-                                                                                           field="content"/></span>
-
-            </li>
-        </g:if>
-
-        <g:if test="${messageInstance?.read}">
-            <li class="fieldcontain">
-                <span id="read-label" class="property-label"><g:message code="message.read.label"
-                                                                        default="Read"/></span>
-
-                <span class="property-value" aria-labelledby="read-label"><g:formatBoolean
-                        boolean="${messageInstance?.read}"/></span>
-
-            </li>
-        </g:if>
-
-    </ol>
-    <g:form url="[resource: messageInstance, action: 'delete']" method="DELETE">
-        <fieldset class="buttons">
-            <g:link class="edit" action="edit" resource="${messageInstance}"><g:message code="default.button.edit.label"
-                                                                                        default="Edit"/></g:link>
-            <g:actionSubmit class="delete" action="delete"
-                            value="${message(code: 'default.button.delete.label', default: 'Delete')}"
-                            onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');"/>
-        </fieldset>
-    </g:form>
-</div>
-</body>
+                            </tr>
+                            
+                        </tbody>
+                    </table>
+                </div>
+                <div class="buttons">
+                    <span class="button"><g:actionSubmit class="edit" action="edit" value="${message(code: 'edit', 'default': 'Edit')}" /></span>
+                    <span class="button"><g:actionSubmit class="delete" action="delete" value="${message(code: 'delete', 'default': 'Delete')}" onclick="return confirm('${message(code: 'delete.confirm', 'default': 'Are you sure?')}');" /></span>
+                </div>
+            </g:form>
+        </div>
+    </body>
 </html>

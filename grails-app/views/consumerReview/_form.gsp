@@ -2,7 +2,7 @@
 
 
 
-<div class="fieldcontain ${hasErrors(bean: consumerReviewInstance, field: 'timestamp', 'error')} required">
+<div hidden="true" class="fieldcontain ${hasErrors(bean: consumerReviewInstance, field: 'timestamp', 'error')} required">
     <label for="timestamp">
         <g:message code="consumerReview.timestamp.label" default="Timestamp"/>
         <span class="required-indicator">*</span>

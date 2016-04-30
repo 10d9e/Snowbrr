@@ -82,6 +82,8 @@ class User implements Serializable {
 		phone nullable: true, phone: true
 	}
 
+	static hasMany = [messages: Message, transactions: Transaction]
+
 	static mapping = {
 		password column: '`password`'
 	}

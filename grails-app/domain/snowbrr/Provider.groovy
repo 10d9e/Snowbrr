@@ -8,7 +8,7 @@ class Provider {
 
     User user
 
-    static hasMany = [reviews: ProviderReview, messages: Message, transactions: Transaction]
+    static hasMany = [reviews: ProviderReview]
 
     static constraints = {
         user nullable: false

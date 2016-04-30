@@ -119,6 +119,8 @@
 						<g:sortableColumn property="companyName" title="${message(code: 'provider.companyName.label', default: 'Company Name')}" />
 
 						<g:sortableColumn property="active" title="${message(code: 'provider.active.label', default: 'Active')}" />
+
+						<th></th>
 					
 					</tr>
 				</thead>
@@ -137,6 +139,9 @@
 						<td>${fieldValue(bean: providerInstance, field: "companyName")}</td>
 					
 						<td><g:formatBoolean boolean="${providerInstance.active}" /></td>
+
+						<td> <g:link controller="transaction" action="consumerRequest" params="[providerId: providerInstance.id]">
+							Request</g:link> </td>
 					
 					</tr>
 				</g:each>

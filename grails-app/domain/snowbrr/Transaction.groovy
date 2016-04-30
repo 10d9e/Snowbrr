@@ -2,9 +2,9 @@ package snowbrr
 
 class Transaction {
 
-    double price
+    double price = 50
 
-    String status = 'request'
+    String status = 'Request'
 
     byte [] photoProof
 
@@ -17,11 +17,12 @@ class Transaction {
     static belongsTo = [provider: Provider, consumer: Consumer]
 
     static constraints = {
-        status inList: ['request', 'not started', 'in progress', 'complete'], nullable: false
+        status inList: ['Request', 'Cancel', 'Price Change', 'Not Started', 'In Progress', 'Complete'], nullable: false
         finishBy (nullable: false, min: new Date() )
         photoProof nullable: true
         providerNotes nullable: true
         consumerNotes nullable: true
         provider nullable: true
+        consumer nullable: true
     }
 }

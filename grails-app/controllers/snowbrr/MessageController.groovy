@@ -1,5 +1,6 @@
 package snowbrr
 
+import grails.converters.JSON
 import grails.plugin.springsecurity.annotation.Secured
 
 import static org.springframework.http.HttpStatus.*
@@ -12,13 +13,24 @@ class MessageController {
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
+    def springSecurityService
+
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
-        respond Message.list(params), model: [messageInstanceCount: Message.count()]
+
+        def messages = Message.findAllByUser(springSecurityService.currentUser)
+
+        respond messages, model: [messageInstanceCount: messages.size()]
     }
 
     def show(Message messageInstance) {
+        messageInstance.read = true
+        save messageInstance
         respond messageInstance
+    }
+
+    def unread() {
+        render Message.findAllByUser(springSecurityService.currentUser).findAll{!it.read}.size()
     }
 
     def create() {
