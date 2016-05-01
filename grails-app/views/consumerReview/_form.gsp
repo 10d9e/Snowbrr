@@ -1,7 +1,5 @@
 <%@ page import="snowbrr.ConsumerReview" %>
 
-
-
 <div hidden="true" class="fieldcontain ${hasErrors(bean: consumerReviewInstance, field: 'timestamp', 'error')} required">
     <label for="timestamp">
         <g:message code="consumerReview.timestamp.label" default="Timestamp"/>
@@ -16,12 +14,13 @@
         <g:message code="consumerReview.rating.label" default="Rating"/>
         <span class="required-indicator">*</span>
     </label>
-    <g:select name="rating" from="${0..5}" class="range" required=""
-              value="${fieldValue(bean: consumerReviewInstance, field: 'rating')}"/>
+
+    <g:render template="/shared/starRatings" model="[rating: consumerReviewInstance.rating]" />
 
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: consumerReviewInstance, field: 'reviewer', 'error')} required">
+
+<div hidden="true" class="fieldcontain ${hasErrors(bean: consumerReviewInstance, field: 'reviewer', 'error')} required">
     <label for="reviewer">
         <g:message code="consumerReview.reviewer.label" default="Reviewer"/>
         <span class="required-indicator">*</span>
@@ -40,7 +39,7 @@
 
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: consumerReviewInstance, field: 'consumer', 'error')} required">
+<div hidden="true" class="fieldcontain ${hasErrors(bean: consumerReviewInstance, field: 'consumer', 'error')} required">
     <label for="consumer">
         <g:message code="consumerReview.consumer.label" default="Consumer"/>
         <span class="required-indicator">*</span>

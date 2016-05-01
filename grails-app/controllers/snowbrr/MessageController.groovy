@@ -20,7 +20,7 @@ class MessageController {
 
         def messages = Message.findAllByUser(springSecurityService.currentUser)
 
-        respond messages, model: [messageInstanceCount: messages.size()]
+        respond messages.sort(), model: [messageInstanceCount: messages.size()]
     }
 
     def show(Message messageInstance) {

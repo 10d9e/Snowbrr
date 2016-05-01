@@ -21,13 +21,14 @@ class TransactionController {
         if( Provider.findByUser ( springSecurityService.currentUser ) ){
             Provider provider = Provider.findByUser ( springSecurityService.currentUser )
             def transactions = Transaction.findAllByProvider(provider)
-            respond transactions, model: [transactionInstanceCount: transactions?.size()]
+            respond transactions.sort(), model: [transactionInstanceCount: transactions?.size()]
         }else if ( Consumer.findByUser ( springSecurityService.currentUser ) ){
             Consumer consumer = Consumer.findByUser ( springSecurityService.currentUser )
             def transactions = Transaction.findAllByConsumer(consumer)
-            respond transactions, model: [transactionInstanceCount: transactions?.size()]
+            respond transactions.sort(), model: [transactionInstanceCount: transactions?.size()]
         } else {
-            respond Transaction.list(params), model: [transactionInstanceCount: Transaction.count()]        }
+            respond Transaction.list(params).sort(), model: [transactionInstanceCount: Transaction.count()]
+        }
     }
 
     def active() {
@@ -42,7 +43,7 @@ class TransactionController {
         }
 
         def s = transactions.findAll{
-            boolean valid = !(it.status in ['Complete', 'Cancel'])
+            boolean valid = !(it.status in ['Complete', 'Cancelled'])
             valid
         }.size()
 
@@ -111,12 +112,18 @@ class TransactionController {
         messageService.send(User.findByUsername('admin'), transactionInstance.provider.user, "${transactionInstance.consumer.user.firstname} ${transactionInstance.consumer.user.lastname} would like to Request a new transaction with you.")
 
         flash.message = 'Transaction has been created and request sent to Provider'
-        redirect transactionInstance
+
+        def targetUri = params.targetUri ?: "/"
+        if(params.targetUri) {
+            redirect(uri: targetUri)
+        }else {
+            redirect transactionInstance
+        }
     }
 
     @Secured('ROLE_CONSUMER')
     def consumerCancel(Transaction transactionInstance) {
-        transactionInstance.status = 'Cancel'
+        transactionInstance.status = 'Cancelled'
         update transactionInstance
 
         messageService.send(User.findByUsername('admin'), transactionInstance.consumer.user, "You have cancelled request for snow removal with ${transactionInstance.provider.companyName}")
@@ -142,7 +149,7 @@ class TransactionController {
 
     @Secured('ROLE_PROVIDER')
     def providerCancel(Transaction transactionInstance) {
-        transactionInstance.status = 'Cancel'
+        transactionInstance.status = 'Cancelled'
         update transactionInstance
 
         messageService.send(User.findByUsername('admin'), transactionInstance.consumer.user, "${transactionInstance.provider.companyName} has cancelled your transaction request")

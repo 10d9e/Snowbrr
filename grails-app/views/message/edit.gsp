@@ -14,9 +14,7 @@
         </div>
         <div class="body">
             <h1><g:message code="message.edit" default="Edit Message" /></h1>
-            <g:if test="${flash.message}">
-            <div class="message"><g:message code="${flash.message}" args="${flash.args}" default="${flash.defaultMessage}" /></div>
-            </g:if>
+
             <g:hasErrors bean="${messageInstance}">
             <div class="errors">
                 <g:renderErrors bean="${messageInstance}" as="list" />

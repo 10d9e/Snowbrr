@@ -5,6 +5,7 @@
     <meta name="layout" content="main">
     <g:set var="entityName" value="${message(code: 'consumerReview.label', default: 'ConsumerReview')}"/>
     <title><g:message code="default.show.label" args="[entityName]"/></title>
+    <asset:stylesheet src="rating.css"></asset:stylesheet>
 </head>
 
 <body>

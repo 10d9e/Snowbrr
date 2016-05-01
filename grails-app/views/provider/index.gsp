@@ -101,9 +101,7 @@
 		</div>
 		<div id="list-provider" class="content scaffold-list" role="main">
 			<h1><g:message code="default.list.label" args="[entityName]" /></h1>
-			<g:if test="${flash.message}">
-				<div class="message" role="status">${flash.message}</div>
-			</g:if>
+
 			<table class="table table-striped">
 			<thead>
 					<tr>
@@ -140,8 +138,11 @@
 					
 						<td><g:formatBoolean boolean="${providerInstance.active}" /></td>
 
-						<td> <g:link controller="transaction" action="consumerRequest" params="[providerId: providerInstance.id]">
-							Request</g:link> </td>
+						<sec:ifAllGranted roles="ROLE_CONSUMER">
+						<td>
+							<g:render template="providerRequestDialog" model="[providerInstance: providerInstance]" />
+						</td>
+						</sec:ifAllGranted>
 					
 					</tr>
 				</g:each>
@@ -150,6 +151,9 @@
 			<div class="pagination">
 				<g:paginate total="${providerInstanceCount ?: 0}" />
 			</div>
+
+
+
 		</div>
 	</body>
 </html>

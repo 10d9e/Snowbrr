@@ -21,12 +21,20 @@
 
 <div id="list-transaction" class="content scaffold-list" role="main">
     <h1><g:message code="default.list.label" args="[entityName]"/></h1>
-    <g:if test="${flash.message}">
-        <div class="message" role="status">${flash.message}</div>
-    </g:if>
+
     <table>
         <thead>
         <tr>
+
+            <th>Transaction </th>
+
+            <sec:ifAllGranted roles="ROLE_CONSUMER">
+                <th><g:message code="transaction.provider.label" default="Provider"/></th>
+            </sec:ifAllGranted>
+
+            <sec:ifAllGranted roles="ROLE_PROVIDER">
+                <th><g:message code="transaction.consumer.label" default="Customer"/></th>
+            </sec:ifAllGranted>
 
             <g:sortableColumn property="status"
                               title="${message(code: 'transaction.status.label', default: 'Status')}"/>
@@ -34,20 +42,33 @@
             <g:sortableColumn property="finishBy"
                               title="${message(code: 'transaction.finishBy.label', default: 'Finish By')}"/>
 
-            <th><g:message code="transaction.provider.label" default="Provider"/></th>
-
         </tr>
         </thead>
         <tbody>
         <g:each in="${transactionInstanceList}" status="i" var="transactionInstance">
             <tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
 
-                <td><g:link action="show"
-                            id="${transactionInstance.id}">${fieldValue(bean: transactionInstance, field: "status")}</g:link></td>
+                <td><g:link class="btn btn-default" action="show"
+                            id="${transactionInstance.id}"> view </g:link></td>
+
+            <sec:ifAllGranted roles="ROLE_CONSUMER">
+                <td><g:link controller="provider"
+                            action="show"
+                            id="${transactionInstance?.provider?.id}">${transactionInstance?.provider?.companyName}</g:link></td>
+            </sec:ifAllGranted>
+
+            <sec:ifAllGranted roles="ROLE_PROVIDER">
+                <td>
+                <g:link controller="consumer"
+                        action="show"
+                        id="${transactionInstance?.consumer?.id}">${transactionInstance?.consumer?.user?.firstname} ${transactionInstance?.consumer?.user?.lastname}
+                </g:link>
+                </td>
+            </sec:ifAllGranted>
+                <td> <trans:label transaction="${transactionInstance}"/> </td>
 
                 <td><g:formatDate date="${transactionInstance.finishBy}"/></td>
 
-                <td>${fieldValue(bean: transactionInstance.provider, field: "companyName")}</td>
 
             </tr>
         </g:each>

@@ -104,7 +104,15 @@
 		</div>
 	</nav>
 
-		<div class="container">
+	<div class="container">
+			<g:if test="${flash.message}">
+				<div class="alert alert-info alert-dismissible" role="alert">
+					<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+					<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					${flash.message}
+				</div>
+			</g:if>
+
 			<g:layoutBody/>
 			<div class="footer" role="contentinfo"></div>
 			<div id="spinner" class="spinner" style="display:none;"><g:message code="spinner.alt" default="Loading&hellip;"/></div>

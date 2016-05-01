@@ -1,6 +1,6 @@
 package snowbrr
 
-class Message {
+class Message implements Comparable<Message>{
 
     String content
 
@@ -16,4 +16,9 @@ class Message {
         timestamp nullable: false
         from nullable: false
     }
+
+    int compareTo(Message other){
+        timestamp.compareTo(other.timestamp)
+    }
+
 }

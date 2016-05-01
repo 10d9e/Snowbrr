@@ -15,7 +15,7 @@ class Driveway {
     static constraints = {
         length nullable: false
         width nullable: false
-        photo nullable: true
+        photo nullable: true, maxSize: 1024 * 1024 * 2
         comment nullable: true
     }
 }

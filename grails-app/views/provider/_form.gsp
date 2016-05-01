@@ -1,7 +1,5 @@
 <%@ page import="snowbrr.Provider" %>
 
-
-
 <div class="fieldcontain ${hasErrors(bean: providerInstance, field: 'user', 'error')} required">
 	<label for="user">
 		<g:message code="provider.user.label" default="User" />

@@ -15,13 +15,16 @@ class ProviderController {
 
     def providerService
 
+    def springSecurityService
+
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
         respond Provider.list(params), model: [providerInstanceCount: Provider.count()]
     }
 
     def show(Provider providerInstance) {
-        respond providerInstance
+        Consumer consumer = Consumer.findByUser( springSecurityService.currentUser )
+        respond providerInstance, model:[consumerId: consumer?.id]
     }
 
     def create() {

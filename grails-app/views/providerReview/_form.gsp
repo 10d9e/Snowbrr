@@ -1,8 +1,7 @@
 <%@ page import="snowbrr.ProviderReview" %>
 
 
-
-<div class="fieldcontain ${hasErrors(bean: providerReviewInstance, field: 'timestamp', 'error')} required">
+<div hidden="true" class="fieldcontain ${hasErrors(bean: providerReviewInstance, field: 'timestamp', 'error')} required">
     <label for="timestamp">
         <g:message code="providerReview.timestamp.label" default="Timestamp"/>
         <span class="required-indicator">*</span>
@@ -16,12 +15,12 @@
         <g:message code="providerReview.rating.label" default="Rating"/>
         <span class="required-indicator">*</span>
     </label>
-    <g:select name="rating" from="${0..5}" class="range" required=""
-              value="${fieldValue(bean: providerReviewInstance, field: 'rating')}"/>
+
+    <g:render template="/shared/starRatings" model="[rating: providerReviewInstance.rating]" />
 
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: providerReviewInstance, field: 'reviewer', 'error')} required">
+<div hidden="true" class="fieldcontain ${hasErrors(bean: providerReviewInstance, field: 'reviewer', 'error')} required">
     <label for="reviewer">
         <g:message code="providerReview.reviewer.label" default="Reviewer"/>
         <span class="required-indicator">*</span>
@@ -40,7 +39,7 @@
 
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: providerReviewInstance, field: 'provider', 'error')} required">
+<div hidden="true" class="fieldcontain ${hasErrors(bean: providerReviewInstance, field: 'provider', 'error')} required">
     <label for="provider">
         <g:message code="providerReview.provider.label" default="Provider"/>
         <span class="required-indicator">*</span>

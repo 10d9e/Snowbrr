@@ -11,6 +11,8 @@ class ConsumerController {
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
+    def springSecurityService
+
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
         respond Consumer.list(params), model: [consumerInstanceCount: Consumer.count()]
@@ -21,7 +23,8 @@ class ConsumerController {
     }
 
     def show(Consumer consumerInstance) {
-        respond consumerInstance
+        Provider provider = Provider.findByUser( springSecurityService.currentUser )
+        respond consumerInstance, model:[providerId: provider?.id]
     }
 
     def create() {
