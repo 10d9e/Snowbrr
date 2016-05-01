@@ -1,19 +1,31 @@
 package snowbrr
 
-
+import grails.buildtestdata.mixin.Build
+import grails.plugin.springsecurity.SpringSecurityService
 import grails.test.mixin.*
 import spock.lang.*
 
 @TestFor(MessageController)
 @Mock(Message)
+@Build(User)
 class MessageControllerSpec extends Specification {
 
     def populateValidParams(params) {
         assert params != null
-        params << [fromUsername: 'test', timestamp: new Date(), content: 'Hello world']
+        params << [from: User.build(), user: User.build(), timestamp: new Date(), content: 'Hello world']
     }
 
     void "Test the index action returns the correct model"() {
+
+        given:
+        def springSecurityService = mockFor(SpringSecurityService)
+        springSecurityService.demand.currentUser{
+            User.build()
+        }
+        springSecurityService.demand.currentUser{
+            User.build()
+        }
+        controller.springSecurityService = springSecurityService.createMock()
 
         when: "The index action is executed"
         controller.index()

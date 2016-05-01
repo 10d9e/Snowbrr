@@ -24,6 +24,10 @@ class MessageController {
     }
 
     def show(Message messageInstance) {
+        if (messageInstance == null) {
+            notFound()
+            return
+        }
         messageInstance.read = true
         save messageInstance
         respond messageInstance

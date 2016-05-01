@@ -27,11 +27,7 @@ class ConsumerSpec extends Specification {
         Consumer consumer = new Consumer(user: new User( username: "jay", password: "jay", firstname: "Jay", lastname: "Logelin", address: "421 Vanier Street", city: "Dieppe",
                 province: "NB", email: "jay.logelin@gmail.com", country: "Canada", latitude: 12, longitude: 12), driveway: new Driveway(length: 100, width: 75))
 
-        consumer.addToMessages(new Message(fromUsername: "User1",  content: "This is a message", timestamp: new Date()) )
-        consumer.addToMessages(new Message(fromUsername: "User2",  content: "This is a message", timestamp: new Date()) )
-        consumer.addToMessages(new Message(fromUsername: "User3",  content: "This is a message", timestamp: new Date()) )
-        consumer.addToMessages(new Message(fromUsername: "User4",  content: "This is a message", timestamp: new Date()) )
-        consumer.addToMessages(new Message(fromUsername: "User5",  content: "This is a message", timestamp: new Date()) )
+        consumer.user.addToMessages( new Message(from: User.build(), user: User.build(), content: "This is a message", timestamp: new Date()) )
 
         then:
         assertTrue consumer.validate()
@@ -41,12 +37,6 @@ class ConsumerSpec extends Specification {
 
         when:
         Consumer consumer = new Consumer( driveway: new Driveway(length: 100, width: 75))
-
-        consumer.addToMessages(new Message(fromUsername: "User1",  content: "This is a message", timestamp: new Date()) )
-        consumer.addToMessages(new Message(fromUsername: "User2",  content: "This is a message", timestamp: new Date()) )
-        consumer.addToMessages(new Message(fromUsername: "User3",  content: "This is a message", timestamp: new Date()) )
-        consumer.addToMessages(new Message(fromUsername: "User4",  content: "This is a message", timestamp: new Date()) )
-        consumer.addToMessages(new Message(fromUsername: "User5",  content: "This is a message", timestamp: new Date()) )
 
         then:
         assertFalse consumer.validate()
@@ -58,11 +48,7 @@ class ConsumerSpec extends Specification {
         Consumer consumer = new Consumer(user: new User( username: "jay", password: "jay", firstname: "Jay", lastname: "Logelin", address: "421 Vanier Street", city: "Dieppe",
                 province: "NB", email: "dfghfgh", country: "Canada", latitude: 12, longitude: 12), driveway: new Driveway(length: 100, width: 75))
 
-        consumer.addToMessages(new Message(fromUsername: "User1",  content: "This is a message", timestamp: new Date()) )
-        consumer.addToMessages(new Message(fromUsername: "User2",  content: "This is a message", timestamp: new Date()) )
-        consumer.addToMessages(new Message(fromUsername: "User3",  content: "This is a message", timestamp: new Date()) )
-        consumer.addToMessages(new Message(fromUsername: "User4",  content: "This is a message", timestamp: new Date()) )
-        consumer.addToMessages(new Message(fromUsername: "User5",  content: "This is a message", timestamp: new Date()) )
+        consumer.user.addToMessages(new Message(from: User.build(), user: User.build(), content: "This is a message", timestamp: new Date()) )
 
         then:
         assertFalse consumer.user.validate()
@@ -75,11 +61,7 @@ class ConsumerSpec extends Specification {
         Consumer consumer = new Consumer(user: new User( username: "jay", password: "jay", lastname: "Logelin", address: "421 Vanier Street", city: "Dieppe",
                 province: "NB", email: "jay.logelin@gmail.com", country: "Canada", latitude: 12, longitude: 12), driveway: new Driveway(length: 100, width: 75))
 
-        consumer.addToMessages(new Message(fromUsername: "User1",  content: "This is a message", timestamp: new Date()) )
-        consumer.addToMessages(new Message(fromUsername: "User2",  content: "This is a message", timestamp: new Date()) )
-        consumer.addToMessages(new Message(fromUsername: "User3",  content: "This is a message", timestamp: new Date()) )
-        consumer.addToMessages(new Message(fromUsername: "User4",  content: "This is a message", timestamp: new Date()) )
-        consumer.addToMessages(new Message(fromUsername: "User5",  content: "This is a message", timestamp: new Date()) )
+        consumer.user.addToMessages(new Message(from: User.build(), user: User.build(), content: "This is a message", timestamp: new Date()) )
 
         then:
         assertFalse consumer.user.validate()
@@ -92,11 +74,7 @@ class ConsumerSpec extends Specification {
         Consumer consumer = new Consumer(user: new User( username: "jay", password: "jay", firstname: "Jay", address: "421 Vanier Street", city: "Dieppe",
                 province: "NB", email: "jay.logelin@gmail.com", country: "Canada", latitude: 12, longitude: 12), driveway: new Driveway(length: 100, width: 75))
 
-        consumer.addToMessages(new Message(fromUsername: "User1",  content: "This is a message", timestamp: new Date()) )
-        consumer.addToMessages(new Message(fromUsername: "User2",  content: "This is a message", timestamp: new Date()) )
-        consumer.addToMessages(new Message(fromUsername: "User3",  content: "This is a message", timestamp: new Date()) )
-        consumer.addToMessages(new Message(fromUsername: "User4",  content: "This is a message", timestamp: new Date()) )
-        consumer.addToMessages(new Message(fromUsername: "User5",  content: "This is a message", timestamp: new Date()) )
+        consumer.user.addToMessages(new Message(from: User.build(), user: User.build(), content: "This is a message", timestamp: new Date()) )
 
         then:
         assertFalse consumer.user.validate()
@@ -110,11 +88,7 @@ class ConsumerSpec extends Specification {
         Consumer consumer = new Consumer(user: new User( username: "jay", password: "jay", firstname: "Jay", lastname: "Logelin", city: "Dieppe",
                 province: "NB", email: "jay.logelin@gmail.com", country: "Canada", latitude: 12, longitude: 12), driveway: new Driveway(length: 100, width: 75))
 
-        consumer.addToMessages(new Message(fromUsername: "User1",  content: "This is a message", timestamp: new Date()) )
-        consumer.addToMessages(new Message(fromUsername: "User2",  content: "This is a message", timestamp: new Date()) )
-        consumer.addToMessages(new Message(fromUsername: "User3",  content: "This is a message", timestamp: new Date()) )
-        consumer.addToMessages(new Message(fromUsername: "User4",  content: "This is a message", timestamp: new Date()) )
-        consumer.addToMessages(new Message(fromUsername: "User5",  content: "This is a message", timestamp: new Date()) )
+        consumer.user.addToMessages(new Message(from: User.build(), user: User.build(), content: "This is a message", timestamp: new Date()) )
 
         then:
         assertFalse consumer.user.validate()
@@ -128,11 +102,7 @@ class ConsumerSpec extends Specification {
         Consumer consumer = new Consumer(user: new User( username: "jay", password: "jay", firstname: "Jay", lastname: "Logelin", address: "421 Vanier Street",
                 province: "NB", email: "jay.logelin@gmail.com", country: "Canada", latitude: 12, longitude: 12), driveway: new Driveway(length: 100, width: 75))
 
-        consumer.addToMessages(new Message(fromUsername: "User1",  content: "This is a message", timestamp: new Date()) )
-        consumer.addToMessages(new Message(fromUsername: "User2",  content: "This is a message", timestamp: new Date()) )
-        consumer.addToMessages(new Message(fromUsername: "User3",  content: "This is a message", timestamp: new Date()) )
-        consumer.addToMessages(new Message(fromUsername: "User4",  content: "This is a message", timestamp: new Date()) )
-        consumer.addToMessages(new Message(fromUsername: "User5",  content: "This is a message", timestamp: new Date()) )
+        consumer.user.addToMessages(new Message(from: User.build(), user: User.build(), content: "This is a message", timestamp: new Date()) )
 
         then:
         assertFalse consumer.user.validate()
@@ -146,11 +116,7 @@ class ConsumerSpec extends Specification {
         Consumer consumer = new Consumer(user: new User( username: "jay", password: "jay", firstname: "Jay", lastname: "Logelin", address: "421 Vanier Street", city: "Dieppe",
                 email: "jay.logelin@gmail.com", country: "Canada", latitude: 12, longitude: 12), driveway: new Driveway(length: 100, width: 75))
 
-        consumer.addToMessages(new Message(fromUsername: "User1",  content: "This is a message", timestamp: new Date()) )
-        consumer.addToMessages(new Message(fromUsername: "User2",  content: "This is a message", timestamp: new Date()) )
-        consumer.addToMessages(new Message(fromUsername: "User3",  content: "This is a message", timestamp: new Date()) )
-        consumer.addToMessages(new Message(fromUsername: "User4",  content: "This is a message", timestamp: new Date()) )
-        consumer.addToMessages(new Message(fromUsername: "User5",  content: "This is a message", timestamp: new Date()) )
+        consumer.user.addToMessages(new Message(from: User.build(), user: User.build(), content: "This is a message", timestamp: new Date()) )
 
         then:
         assertFalse consumer.user.validate()
@@ -164,11 +130,7 @@ class ConsumerSpec extends Specification {
         Consumer consumer = new Consumer(user: new User( username: "jay", password: "jay", firstname: "Jay", lastname: "Logelin", address: "421 Vanier Street", city: "Dieppe",
                 province: "NB", email: "jay.logelin@gmail.com", latitude: 12, longitude: 12), driveway: new Driveway(length: 100, width: 75))
 
-        consumer.addToMessages(new Message(fromUsername: "User1",  content: "This is a message", timestamp: new Date()) )
-        consumer.addToMessages(new Message(fromUsername: "User2",  content: "This is a message", timestamp: new Date()) )
-        consumer.addToMessages(new Message(fromUsername: "User3",  content: "This is a message", timestamp: new Date()) )
-        consumer.addToMessages(new Message(fromUsername: "User4",  content: "This is a message", timestamp: new Date()) )
-        consumer.addToMessages(new Message(fromUsername: "User5",  content: "This is a message", timestamp: new Date()) )
+        consumer.user.addToMessages(new Message(from: User.build(), user: User.build(), content: "This is a message", timestamp: new Date()) )
 
         then:
         assertFalse consumer.user.validate()
@@ -182,11 +144,7 @@ class ConsumerSpec extends Specification {
         Consumer consumer = new Consumer(user: new User( username: "jay", password: "jay", firstname: "Jay", lastname: "Logelin", address: "421 Vanier Street", city: "Dieppe",
                 province: "NB", email: "jay.logelin@gmail.com", country: "Spain", latitude: 12, longitude: 12), driveway: new Driveway(length: 100, width: 75))
 
-        consumer.addToMessages(new Message(fromUsername: "User1",  content: "This is a message", timestamp: new Date()) )
-        consumer.addToMessages(new Message(fromUsername: "User2",  content: "This is a message", timestamp: new Date()) )
-        consumer.addToMessages(new Message(fromUsername: "User3",  content: "This is a message", timestamp: new Date()) )
-        consumer.addToMessages(new Message(fromUsername: "User4",  content: "This is a message", timestamp: new Date()) )
-        consumer.addToMessages(new Message(fromUsername: "User5",  content: "This is a message", timestamp: new Date()) )
+        consumer.user.addToMessages(new Message(from: User.build(), user: User.build(), content: "This is a message", timestamp: new Date()) )
 
         then:
         assertFalse consumer.user.validate()
@@ -200,11 +158,7 @@ class ConsumerSpec extends Specification {
         Consumer consumer = new Consumer(user: new User( username: "jay", password: "jay", firstname: "Jay", lastname: "Logelin", address: "421 Vanier Street", city: "Dieppe",
                 province: "NB", email: "jay.logelin@gmail.com", country: "Canada", latitude: 12, longitude: 12))
 
-        consumer.addToMessages(new Message(fromUsername: "User1",  content: "This is a message", timestamp: new Date()) )
-        consumer.addToMessages(new Message(fromUsername: "User2",  content: "This is a message", timestamp: new Date()) )
-        consumer.addToMessages(new Message(fromUsername: "User3",  content: "This is a message", timestamp: new Date()) )
-        consumer.addToMessages(new Message(fromUsername: "User4",  content: "This is a message", timestamp: new Date()) )
-        consumer.addToMessages(new Message(fromUsername: "User5",  content: "This is a message", timestamp: new Date()) )
+        consumer.user.addToMessages(new Message(from: User.build(), user: User.build(), content: "This is a message", timestamp: new Date()) )
 
         then:
         assertFalse consumer.validate()
