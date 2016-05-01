@@ -97,7 +97,11 @@
 							</sec:ifAllGranted>
 							</a>
 						</li>
-						<li> <g:remoteLink id="logout" class="logout" controller="logout" method="post" asynchronous="false" onSuccess="location.reload()">Logout</g:remoteLink> </li>
+						<li>
+
+						<g:remoteLink class="logout" controller="logout" method="post" asynchronous="false" onComplete="location.reload()" onSuccess="location.reload()">Logout</g:remoteLink>
+
+
 					</sec:ifLoggedIn>
 				</ul>
 			</div>

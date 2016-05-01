@@ -11,6 +11,8 @@ class ConsumerReviewController {
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
+    def messageService
+
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
         respond ConsumerReview.list(params), model: [consumerReviewInstanceCount: ConsumerReview.count()]
@@ -37,6 +39,8 @@ class ConsumerReviewController {
         }
 
         consumerReviewInstance.save flush: true
+
+        messageService.send( User.findByUsername('admin'), consumerReviewInstance.consumer.user, "${consumerReviewInstance.reviewer.user.username} at ${consumerReviewInstance.reviewer.companyName} has reviewed you!" )
 
         request.withFormat {
             form multipartForm {

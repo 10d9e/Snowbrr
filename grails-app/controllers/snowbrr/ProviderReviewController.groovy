@@ -11,6 +11,8 @@ class ProviderReviewController {
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
+    def messageService
+
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
         respond ProviderReview.list(params), model: [providerReviewInstanceCount: ProviderReview.count()]
@@ -37,6 +39,8 @@ class ProviderReviewController {
         }
 
         providerReviewInstance.save flush: true
+
+        messageService.send( User.findByUsername('admin'), providerReviewInstance.provider.user, "${providerReviewInstance.reviewer.user.firstname} ${providerReviewInstance.reviewer.user.lastname} has reviewed you!" )
 
         request.withFormat {
             form multipartForm {
