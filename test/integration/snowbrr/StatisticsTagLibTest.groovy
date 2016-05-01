@@ -23,7 +23,7 @@ class StatisticsTagLibTest extends GroovyPagesTestCase {
         }
 
         then:
-        assert applyTemplate('<stats:averageRating provider="${provider}" />', [provider: provider]) == "4"
+        assert applyTemplate('<stats:averageRating provider="${provider}" />', [provider: provider]) == "4.0"
     }
 
     void "test averageRating again" () {
