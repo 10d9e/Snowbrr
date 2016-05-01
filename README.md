@@ -21,7 +21,7 @@ On both the Provider and Customer side, you can also Rate customers/providers by
 It is also note-worthy to view the Provider Profile review tab, where all of the star-ratings, customer comments and rating statistics are displayed for the Provider ( from user 'jay' find and view provider 'maryse' to see a populated example )
 
 ###Third Party Dependencies
-*spring-security-core:2.0.0
-*build-test-data:2.4.0
-*scaffolding:2.1.2
-*hibernate4:4.3.10
+* spring-security-core:2.0.0
+* build-test-data:2.4.0
+* scaffolding:2.1.2
+* hibernate4:4.3.10
