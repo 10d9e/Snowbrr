@@ -1,10 +1,9 @@
-<%@ page import="snowbrr.Provider" %>
 
 <div class="row">
     <div class="col-sm-12">
         <hr/>
         <div class="review-block">
-            <% providerInstance.reviews.each{ %>
+            <% target.reviews.each{ %>
             <div class="row">
                 <div class="col-sm-3">
                     <img src="http://dummyimage.com/60x60/666/ffffff&text=No+Image" class="img-rounded">

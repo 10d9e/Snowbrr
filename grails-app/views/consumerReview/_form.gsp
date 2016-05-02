@@ -32,10 +32,11 @@
 
 <div class="fieldcontain ${hasErrors(bean: consumerReviewInstance, field: 'content', 'error')} ">
     <label for="content">
-        <g:message code="consumerReview.content.label" default="Content"/>
+        <g:message code="consumerReview.content.label" default="Comment"/>
 
     </label>
-    <g:textField name="content" value="${consumerReviewInstance?.content}"/>
+
+    <g:textArea name="content" value="${consumerReviewInstance?.content}"/>
 
 </div>
 

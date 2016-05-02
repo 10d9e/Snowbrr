@@ -43,11 +43,11 @@ class BootStrap {
         //provider.user.addToMessages(new Message(from: jay, user: provider.user, content: "This is a message", timestamp: new Date()) )
         //provider.user.addToMessages(new Message(from: jay,user: provider.user,  content: "This is a message", timestamp: new Date()) )
 
-/*
+
         Consumer.list().each {
             provider.addToReviews([reviewer: it, timestamp: new Date(), rating: randomInt([0..5]), title: 'Awesome!', content: "Maryse was great, cars were moved and she was very nice."])
         }
-*/
+
         save provider
 
         //consumer.addToReviews( new ConsumerReview( reviewer:provider, timestamp: new Date(), rating: randomInt([0..5]), title: 'Awesome!', content: "Did a great job, I can see my pavement again!" ) )

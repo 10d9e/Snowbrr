@@ -73,7 +73,7 @@
 					<li ${controllerName == 'provider' && actionName == 'index' ? 'class=active' : ''}><g:link controller="provider" action="index">Providers</g:link></li>
 					<li ${controllerName == 'transaction' && actionName == 'index' ? 'class=active' : ''}>
 						<g:link controller="transaction" action="index">
-							My Transactions
+							Transactions
 							<span id="trans" class="badge"></span>
 						</g:link>
 					</li>

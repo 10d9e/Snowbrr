@@ -7,11 +7,11 @@ class StatisticsTagLib {
     def statisticsService
 
     /**
-     * @attr provider REQUIRED
+     * @attr target REQUIRED
      */
     def renderStars = { attrs ->
 
-        ProviderRatingStatistics stats = statisticsService.getProviderRatingStatistics(attrs.provider)
+        RatingStatistics stats = statisticsService.getRatingStatistics(attrs.target)
 
         def average = stats.average.trunc()
 
@@ -30,106 +30,106 @@ class StatisticsTagLib {
     }
 
     /**
-     * @attr provider REQUIRED
+     * @attr target REQUIRED
      */
     def averageRating = { attrs ->
-        out << statisticsService.getProviderRatingStatistics(attrs.provider).average
+        out << statisticsService.getRatingStatistics(attrs.target).average
     }
 
     /**
-     * @attr provider REQUIRED
+     * @attr target REQUIRED
      */
     def zeroStarCount = { attrs ->
-        out << statisticsService.getProviderRatingStatistics(attrs.provider).starRatings[0]
+        out << statisticsService.getRatingStatistics(attrs.target).starRatings[0]
     }
 
     /**
-     * @attr provider REQUIRED
+     * @attr target REQUIRED
      */
     def zeroStarPct = { attrs ->
-        processStarPct attrs.provider, 0, out
+        processStarPct attrs.target, 0, out
     }
 
     /**
-     * @attr provider REQUIRED
+     * @attr target REQUIRED
      */
     def oneStarCount = { attrs ->
-        out << statisticsService.getProviderRatingStatistics(attrs.provider).starRatings[1]
+        out << statisticsService.getRatingStatistics(attrs.target).starRatings[1]
     }
 
     /**
-     * @attr provider REQUIRED
+     * @attr target REQUIRED
      */
     def oneStarPct = { attrs ->
-        processStarPct attrs.provider, 1, out
+        processStarPct attrs.target, 1, out
     }
 
     /**
-     * @attr provider REQUIRED
+     * @attr target REQUIRED
      */
     def twoStarCount = { attrs ->
-        out << statisticsService.getProviderRatingStatistics(attrs.provider).starRatings[2]
+        out << statisticsService.getRatingStatistics(attrs.target).starRatings[2]
     }
 
     /**
-     * @attr provider REQUIRED
+     * @attr target REQUIRED
      */
     def twoStarPct = { attrs ->
-        processStarPct attrs.provider, 2, out
+        processStarPct attrs.target, 2, out
     }
 
     /**
-     * @attr provider REQUIRED
+     * @attr target REQUIRED
      */
     def threeStarCount = { attrs ->
-        out << statisticsService.getProviderRatingStatistics(attrs.provider).starRatings[3]
+        out << statisticsService.getRatingStatistics(attrs.target).starRatings[3]
     }
 
     /**
-     * @attr provider REQUIRED
+     * @attr target REQUIRED
      */
     def threeStarPct = { attrs ->
-        processStarPct attrs.provider, 3, out
+        processStarPct attrs.target, 3, out
     }
 
     /**
-     * @attr provider REQUIRED
+     * @attr target REQUIRED
      */
     def fourStarCount = { attrs ->
-        out << statisticsService.getProviderRatingStatistics(attrs.provider).starRatings[4]
+        out << statisticsService.getRatingStatistics(attrs.target).starRatings[4]
     }
 
     /**
-     * @attr provider REQUIRED
+     * @attr target REQUIRED
      */
     def fourStarPct = { attrs ->
-        processStarPct attrs.provider, 4, out
+        processStarPct attrs.target, 4, out
     }
 
     /**
-     * @attr provider REQUIRED
+     * @attr target REQUIRED
      */
     def fiveStarCount = { attrs ->
-        out << statisticsService.getProviderRatingStatistics(attrs.provider).starRatings[5]
+        out << statisticsService.getRatingStatistics(attrs.target).starRatings[5]
     }
 
     /**
-     * @attr provider REQUIRED
+     * @attr target REQUIRED
      */
     def fiveStarPct = { attrs ->
-        processStarPct attrs.provider, 5, out
+        processStarPct attrs.target, 5, out
     }
 
-    def processStarPct(def provider, int starRating, def out){
-        ProviderRatingStatistics stats = statisticsService.getProviderRatingStatistics(provider)
+    def processStarPct(def target, int starRating, def out){
+        RatingStatistics stats = statisticsService.getRatingStatistics(target)
         def v = stats.size > 0 ? stats.starRatings[starRating] / stats.size * 100 : 0
         out << v
     }
 
     /**
-     * @attr provider REQUIRED
+     * @attr target REQUIRED
      */
     def reviewSize = { attrs ->
-        out << statisticsService.getProviderRatingStatistics(attrs.provider).size
+        out << statisticsService.getRatingStatistics(attrs.target).size
     }
 }

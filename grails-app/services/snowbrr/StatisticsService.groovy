@@ -17,24 +17,24 @@ class StatisticsService {
 
     }
 
-    def getProviderRatingStatistics(Provider provider) {
+    def getRatingStatistics(def target) {
 
         def sum = 0
 
         def starRatings = [0,0,0,0,0,0]
 
-        provider.reviews.each {
+        target.reviews.each {
             sum += it.rating
             starRatings[it.rating]++
         }
 
         Double average = 0
-        if( provider.reviews ) {
-            average = sum / provider.reviews.size() as Double
+        if( target.reviews ) {
+            average = sum / target.reviews.size() as Double
             average = average.round(1)
         }
 
-        new ProviderRatingStatistics(average: average, starRatings: starRatings, size: provider.reviews.size())
+        new RatingStatistics(average: average, starRatings: starRatings, size: target.reviews.size())
 
     }
 }

@@ -42,10 +42,13 @@
 			<div class="col-lg-12 col-sm-12">
 				<div class="card hovercard">
 					<div class="card-background">
-						<img class="card-bkimg" alt="" src="${assetPath(src: 'jay.jpg')}">
+						<img class="card-bkimg" alt="" src="${assetPath(src: 'jay.png')}">
 					</div>
 					<div class="useravatar">
-						<img alt="" src="${assetPath(src: 'jay.jpg')}">
+						<img alt="" src="${assetPath(src: 'jay.png')}">
+					</div>
+					<div class="type">
+						<h2><span class="label label-info">Provider</span></h2>
 					</div>
 					<div class="card-info"> <span class="card-title">${providerInstance?.user?.firstname} ${providerInstance?.user?.lastname}</span>
 
@@ -255,8 +258,8 @@
 
 						<div class="tab-pane fade in" id="tab2">
 
-							<g:render template="stats" model="[providerInstance: providerInstance]" />
-							<g:render template="review" model="[providerInstance: providerInstance]" />
+							<g:render template="/shared/stats" model="[target: providerInstance]" />
+							<g:render template="/shared/review" model="[target: providerInstance]" />
 
 						</div>
 

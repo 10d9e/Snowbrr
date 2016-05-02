@@ -3,7 +3,7 @@ package snowbrr
 /**
  * Created by jay on 30/04/16.
  */
-class ProviderRatingStatistics {
+class RatingStatistics {
 
     Number average
 
