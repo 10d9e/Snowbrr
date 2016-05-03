@@ -55,8 +55,8 @@ class BootStrap {
         save provider
         save consumer
 
-        5.times {
-            Transaction transaction = new Transaction(consumer: consumer, provider: provider, price: 50, status: "In Progress", finishBy: new Date(), consumerNotes: "I would like to have this done before the big storm")
+        2.times {
+            Transaction transaction = new Transaction(consumer: consumer, provider: provider, price: 50, status: " Complete", finishBy: new Date(), consumerNotes: "I would like to have this done before the big storm")
             save transaction
         }
     }

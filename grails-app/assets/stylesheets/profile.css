@@ -38,6 +38,13 @@ User Profile Styling
     margin-top: -200px;
     min-width: 130%;
 }
+
+.card.hovercard .type {
+    position: absolute;
+    top: -5px;
+    right: 20px;
+}
+
 .card.hovercard .useravatar {
     position: absolute;
     top: 15px;
