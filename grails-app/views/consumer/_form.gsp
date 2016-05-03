@@ -1,16 +1,5 @@
 <%@ page import="snowbrr.Consumer" %>
 
-
-
-<div class="fieldcontain ${hasErrors(bean: consumerInstance, field: 'user', 'error')} required">
-	<label for="user">
-		<g:message code="consumer.user.label" default="User" />
-		<span class="required-indicator">*</span>
-	</label>
-	<g:select id="user" name="user.id" from="${snowbrr.User.list()}" optionKey="id" required="" value="${consumerInstance?.user?.id}" class="many-to-one"/>
-
-</div>
-
 <div class="fieldcontain ${hasErrors(bean: consumerInstance, field: 'driveway', 'error')} required">
 	<label for="driveway">
 		<g:message code="consumer.driveway.label" default="Driveway" />
@@ -20,47 +9,118 @@
 
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: consumerInstance, field: 'messages', 'error')} ">
-	<label for="messages">
-		<g:message code="consumer.messages.label" default="Messages" />
-		
+<!-- insert user stuff here -->
+
+<div class="fieldcontain ${hasErrors(bean: providerInstance?.user, field: 'username', 'error')} required">
+	<label for="username">
+		<g:message code="user.username.label" default="Username" />
+		<span class="required-indicator">*</span>
 	</label>
-	<g:select name="messages" from="${snowbrr.Message.list()}" multiple="multiple" optionKey="id" size="5" value="${consumerInstance?.messages*.id}" class="many-to-many"/>
+	<g:textField name="username" required="" value="${providerInstance?.user?.username}"/>
 
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: consumerInstance, field: 'reviews', 'error')} ">
-	<label for="reviews">
-		<g:message code="consumer.reviews.label" default="Reviews" />
-		
+<div class="fieldcontain ${hasErrors(bean: providerInstance?.user, field: 'password', 'error')} required">
+	<label for="password">
+		<g:message code="user.password.label" default="Password" />
+		<span class="required-indicator">*</span>
 	</label>
-	
-<ul class="one-to-many">
-<g:each in="${consumerInstance?.reviews?}" var="r">
-    <li><g:link controller="consumerReview" action="show" id="${r.id}">${r?.encodeAsHTML()}</g:link></li>
-</g:each>
-<li class="add">
-<g:link controller="consumerReview" action="create" params="['consumer.id': consumerInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'consumerReview.label', default: 'ConsumerReview')])}</g:link>
-</li>
-</ul>
-
+	<g:textField name="password" required="" value="${providerInstance?.user?.password}"/>
 
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: consumerInstance, field: 'transactions', 'error')} ">
-	<label for="transactions">
-		<g:message code="consumer.transactions.label" default="Transactions" />
-		
+<div class="fieldcontain ${hasErrors(bean: providerInstance?.user, field: 'email', 'error')} required">
+	<label for="email">
+		<g:message code="user.email.label" default="Email" />
+		<span class="required-indicator">*</span>
 	</label>
-	
-<ul class="one-to-many">
-<g:each in="${consumerInstance?.transactions?}" var="t">
-    <li><g:link controller="transaction" action="show" id="${t.id}">${t?.encodeAsHTML()}</g:link></li>
-</g:each>
-<li class="add">
-<g:link controller="transaction" action="create" params="['consumer.id': consumerInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'transaction.label', default: 'Transaction')])}</g:link>
-</li>
-</ul>
+	<g:field type="email" name="email" required="" value="${providerInstance?.user?.email}"/>
+
+</div>
+
+<div class="fieldcontain ${hasErrors(bean: providerInstance?.user, field: 'firstname', 'error')} required">
+	<label for="firstname">
+		<g:message code="user.firstname.label" default="Firstname" />
+		<span class="required-indicator">*</span>
+	</label>
+	<g:textField name="firstname" required="" value="${providerInstance?.user?.firstname}"/>
+
+</div>
+
+<div class="fieldcontain ${hasErrors(bean: providerInstance?.user, field: 'lastname', 'error')} required">
+	<label for="lastname">
+		<g:message code="user.lastname.label" default="Lastname" />
+		<span class="required-indicator">*</span>
+	</label>
+	<g:textField name="lastname" required="" value="${providerInstance?.user?.lastname}"/>
+
+</div>
+
+<div class="fieldcontain ${hasErrors(bean: providerInstance?.user, field: 'address', 'error')} required">
+	<label for="address">
+		<g:message code="user.address.label" default="Address" />
+		<span class="required-indicator">*</span>
+	</label>
+	<g:textField name="address" required="" value="${providerInstance?.user?.address}"/>
+
+</div>
+
+<div class="fieldcontain ${hasErrors(bean: providerInstance?.user, field: 'city', 'error')} required">
+	<label for="city">
+		<g:message code="user.city.label" default="City" />
+		<span class="required-indicator">*</span>
+	</label>
+	<g:textField name="city" required="" value="${providerInstance?.user?.city}"/>
+
+</div>
+
+<div class="fieldcontain ${hasErrors(bean: providerInstance?.user, field: 'province', 'error')} required">
+	<label for="province">
+		<g:message code="user.province.label" default="Province" />
+		<span class="required-indicator">*</span>
+	</label>
+	<g:textField name="province" required="" value="${providerInstance?.user?.province}"/>
+
+</div>
+
+
+
+<div class="fieldcontain ${hasErrors(bean: providerInstance?.user, field: 'avatar', 'error')} ">
+	<label for="avatar">
+		<g:message code="user.avatar.label" default="Avatar" />
+
+	</label>
+	<input type="file" id="avatar" name="avatar" />
+
+</div>
+
+<div class="fieldcontain ${hasErrors(bean: providerInstance?.user, field: 'latitude', 'error')} required">
+	<label for="latitude">
+		<g:message code="user.latitude.label" default="Latitude" />
+		<span class="required-indicator">*</span>
+	</label>
+	<g:field name="latitude" value="${fieldValue(bean: providerInstance?.user, field: 'latitude')}" required=""/>
+
+</div>
+
+<div class="fieldcontain ${hasErrors(bean: providerInstance?.user, field: 'longitude', 'error')} required">
+	<label for="longitude">
+		<g:message code="user.longitude.label" default="Longitude" />
+		<span class="required-indicator">*</span>
+	</label>
+	<g:field name="longitude" value="${fieldValue(bean: providerInstance?.user, field: 'longitude')}" required=""/>
+
+</div>
+
+<div class="fieldcontain ${hasErrors(bean: providerInstance?.user, field: 'phone', 'error')} ">
+	<label for="phone">
+		<g:message code="user.phone.label" default="Phone" />
+
+	</label>
+	<g:textField name="phone" value="${providerInstance?.user?.phone}"/>
+
+</div>
+
 
 
 </div>

@@ -6,6 +6,8 @@ class Provider {
 
     boolean active = true
 
+    Float initialPrice = 50
+
     User user
 
     static hasMany = [reviews: ProviderReview]

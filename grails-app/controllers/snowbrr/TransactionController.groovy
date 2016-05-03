@@ -106,6 +106,7 @@ class TransactionController {
         transactionInstance.provider = provider
         transactionInstance.status = 'Request'
         transactionInstance.finishBy = new Date()
+        transactionInstance.price = provider.initialPrice
         update transactionInstance
 
         messageService.send(User.findByUsername('admin'), transactionInstance.consumer.user, 'You have created a new transaction request with ' + transactionInstance.provider.companyName)

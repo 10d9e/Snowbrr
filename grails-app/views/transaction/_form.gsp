@@ -37,32 +37,11 @@
         <g:message code="transaction.providerNotes.label" default="Provider Notes"/>
 
     </label>
-    <g:textField name="providerNotes" value="${transactionInstance?.providerNotes}"/>
+    <g:textArea name="providerNotes" value="${transactionInstance?.providerNotes}"/>
 
 </div>
 
 </sec:ifAllGranted>
-
-<sec:ifAllGranted roles="ROLE_CONSUMER">
-<div class="fieldcontain ${hasErrors(bean: transactionInstance, field: 'consumerNotes', 'error')} ">
-    <label for="consumerNotes">
-        <g:message code="transaction.consumerNotes.label" default="Consumer Notes"/>
-
-    </label>
-    <g:textField name="consumerNotes" value="${transactionInstance?.consumerNotes}"/>
-</div>
-</sec:ifAllGranted>
-
-<sec:ifAllGranted roles="ROLE_PROVIDER">
-<div class="fieldcontain ${hasErrors(bean: transactionInstance, field: 'consumerNotes', 'error')} ">
-    <label for="consumerNotes">
-        <g:message code="transaction.consumerNotes.label" default="Consumer Notes"/>
-
-    </label>
-    <g:textField name="consumerNotes" disabled="true" value="${transactionInstance?.consumerNotes}"/>
-</div>
-</sec:ifAllGranted>
-
 
 <div class="fieldcontain ${hasErrors(bean: transactionInstance, field: 'provider', 'error')} ">
     <label for="provider">
@@ -91,5 +70,27 @@
             <span class="required-indicator">*</span>
         </label>
         <g:field name="price" disabled="true" value="${fieldValue(bean: transactionInstance, field: 'price')}" required=""/>
+    </div>
+</sec:ifAllGranted>
+
+
+
+<sec:ifAllGranted roles="ROLE_CONSUMER">
+    <div class="fieldcontain ${hasErrors(bean: transactionInstance, field: 'consumerNotes', 'error')} ">
+        <label for="consumerNotes">
+            <g:message code="transaction.consumerNotes.label" default="Consumer Notes"/>
+
+        </label>
+        <g:textArea name="consumerNotes" value="${transactionInstance?.consumerNotes}"/>
+    </div>
+</sec:ifAllGranted>
+
+<sec:ifAllGranted roles="ROLE_PROVIDER">
+    <div class="fieldcontain ${hasErrors(bean: transactionInstance, field: 'consumerNotes', 'error')} ">
+        <label for="consumerNotes">
+            <g:message code="transaction.consumerNotes.label" default="Consumer Notes"/>
+
+        </label>
+        <g:textArea name="consumerNotes" disabled="true" value="${transactionInstance?.consumerNotes}"/>
     </div>
 </sec:ifAllGranted>

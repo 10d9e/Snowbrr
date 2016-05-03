@@ -27,6 +27,7 @@ class ConsumerController {
         respond consumerInstance, model:[providerId: provider?.id]
     }
 
+    @Secured(['ROLE_CONSUMER', 'ROLE_ADMIN'])
     def create() {
         respond new Consumer(params)
     }
@@ -54,10 +55,17 @@ class ConsumerController {
         }
     }
 
+    @Secured(['ROLE_CONSUMER', 'ROLE_ADMIN'])
     def edit(Consumer consumerInstance) {
+        if(consumerInstance.user != springSecurityService.currentUser){
+            flash.message = 'You do not have access to update this customer.'
+            respond consumerInstance, view: 'show'
+            return
+        }
         respond consumerInstance
     }
 
+    @Secured(['ROLE_CONSUMER', 'ROLE_ADMIN'])
     @Transactional
     def update(Consumer consumerInstance) {
         if (consumerInstance == null) {
@@ -81,6 +89,7 @@ class ConsumerController {
         }
     }
 
+    @Secured('ROLE_ADMIN')
     @Transactional
     def delete(Consumer consumerInstance) {
 

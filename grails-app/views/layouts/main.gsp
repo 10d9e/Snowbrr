@@ -1,3 +1,7 @@
+<%@ page import="snowbrr.User" %>
+<%@ page import="snowbrr.Provider" %>
+<%@ page import="snowbrr.Consumer" %>
+
 <!DOCTYPE html>
 <!--[if lt IE 7 ]> <html lang="en" class="no-js ie6"> <![endif]-->
 <!--[if IE 7 ]>    <html lang="en" class="no-js ie7"> <![endif]-->
@@ -91,10 +95,15 @@
 					</sec:ifNotLoggedIn>
 					<sec:ifLoggedIn>
 
-						<li><a id="greet">Hello, <sec:username/>!
+						<li>
 							<sec:ifAllGranted roles="ROLE_PROVIDER">
-								<span class="label label-primary">Provider</span>
+								<g:link controller="provider" action="show" id="${Provider.findByUser ( User.findByUsername( sec.username() ) ).id}">Hello, <sec:username/>! <span class="label label-primary">Provider</span></g:link>
+
 							</sec:ifAllGranted>
+							<sec:ifAllGranted roles="ROLE_CONSUMER">
+								<g:link controller="consumer" action="show" id="${Consumer.findByUser ( User.findByUsername( sec.username() ) ).id}">Hello, <sec:username/>! <span class="label label-default">Customer</span></g:link>
+							</sec:ifAllGranted>
+
 							</a>
 						</li>
 						<li>

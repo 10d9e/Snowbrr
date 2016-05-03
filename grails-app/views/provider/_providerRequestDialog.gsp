@@ -12,7 +12,8 @@
                 <h4 class="modal-title">Provider Request</h4>
             </div>
             <div class="modal-body">
-                <p>Would you like to start a transaction with ${providerInstance.user.firstname} ${providerInstance.user.lastname} ?</p>
+                <p>Begin transaction with ${providerInstance.user.firstname} ${providerInstance.user.lastname} ( ${providerInstance.companyName} )
+                 for <g:formatNumber number="${providerInstance.initialPrice}" format="\$ ###,###.##" />?</p>
 
             </div>
             <div class="modal-footer">

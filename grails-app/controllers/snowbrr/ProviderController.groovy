@@ -8,7 +8,6 @@ import grails.transaction.Transactional
 
 @Transactional(readOnly = true)
 @Secured(['ROLE_CONSUMER', 'ROLE_PROVIDER'])
-
 class ProviderController {
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
@@ -27,6 +26,7 @@ class ProviderController {
         respond providerInstance, model:[consumerId: consumer?.id]
     }
 
+    @Secured(['ROLE_PROVIDER', 'ROLE_ADMIN'])
     def create() {
         respond new Provider(params)
     }
@@ -35,7 +35,7 @@ class ProviderController {
         render providerService.listProviders() as JSON
     }
 
-
+    @Secured(['ROLE_PROVIDER', 'ROLE_ADMIN'])
     @Transactional
     def save(Provider providerInstance) {
         if (providerInstance == null) {
@@ -59,14 +59,26 @@ class ProviderController {
         }
     }
 
+    @Secured(['ROLE_PROVIDER', 'ROLE_ADMIN'])
     def edit(Provider providerInstance) {
+        if(providerInstance.user != springSecurityService.currentUser){
+            flash.message = 'You do not have access to update this provider.'
+            respond providerInstance, view: 'show'
+            return
+        }
         respond providerInstance
     }
 
+    @Secured(['ROLE_PROVIDER', 'ROLE_ADMIN'])
     @Transactional
     def update(Provider providerInstance) {
         if (providerInstance == null) {
             notFound()
+            return
+        }
+
+        if(providerInstance.user != springSecurityService.currentUser){
+            flash.message = 'You do not have access to update this provider.'
             return
         }
 
@@ -86,6 +98,7 @@ class ProviderController {
         }
     }
 
+    @Secured('ROLE_ADMIN')
     @Transactional
     def delete(Provider providerInstance) {
 
