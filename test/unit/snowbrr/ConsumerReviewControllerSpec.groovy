@@ -11,7 +11,7 @@ class ConsumerReviewControllerSpec extends Specification {
 
     def populateValidParams(params) {
         assert params != null
-        params << [consumer: Consumer.build(), reviewer: Provider.build(), timestamp: new Date(), rating: 4, content: "Did a great job, I can see my pavement again!"]
+        params << [consumer: Consumer.build(), reviewer: Provider.build(), timestamp: new Date(), rating: 4, content: "Did a great job, I can see my pavement again!" ]
     }
 
     void "Test the index action returns the correct model"() {
@@ -33,6 +33,11 @@ class ConsumerReviewControllerSpec extends Specification {
     }
 
     void "Test the save action correctly persists an instance"() {
+
+        given:
+        def messageService = mockFor(MessageService)
+        messageService.demand.send{}
+        controller.messageService = messageService.createMock()
 
         when: "The save action is executed with an invalid instance"
         request.contentType = FORM_CONTENT_TYPE

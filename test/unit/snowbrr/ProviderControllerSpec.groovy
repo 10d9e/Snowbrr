@@ -105,7 +105,7 @@ class ProviderControllerSpec extends Specification {
         controller.update(null)
 
         then: "A 404 error is returned"
-        response.redirectedUrl == '/provider/index'
+        response.redirectedUrl == '/'
         flash.message != null
 
 
@@ -137,7 +137,7 @@ class ProviderControllerSpec extends Specification {
         controller.delete(null)
 
         then: "A 404 is returned"
-        response.redirectedUrl == '/provider/index'
+        response.redirectedUrl == '/'
         flash.message != null
 
         when: "A domain instance is created"
@@ -153,7 +153,7 @@ class ProviderControllerSpec extends Specification {
 
         then: "The instance is deleted"
         Provider.count() == 0
-        response.redirectedUrl == '/provider/index'
+        response.redirectedUrl == '/'
         flash.message != null
     }
 }

@@ -34,6 +34,11 @@ class ProviderReviewControllerSpec extends Specification {
 
     void "Test the save action correctly persists an instance"() {
 
+        given:
+        def messageService = mockFor(MessageService)
+        messageService.demand.send{}
+        controller.messageService = messageService.createMock()
+
         when: "The save action is executed with an invalid instance"
         request.contentType = FORM_CONTENT_TYPE
         request.method = 'POST'
