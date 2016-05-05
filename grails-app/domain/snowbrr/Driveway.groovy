@@ -18,4 +18,8 @@ class Driveway {
         photo nullable: true, maxSize: 1024 * 1024 * 2
         comment nullable: true
     }
+
+    String toString(){
+        "${length} x ${width}"
+    }
 }

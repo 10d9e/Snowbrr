@@ -2,7 +2,7 @@
 
 
 
-<div class="fieldcontain ${hasErrors(bean: transactionInstance, field: 'status', 'error')} required">
+<div hidden class="fieldcontain ${hasErrors(bean: transactionInstance, field: 'status', 'error')} required">
     <label for="status">
         <g:message code="transaction.status.label" default="Status"/>
         <span class="required-indicator">*</span>

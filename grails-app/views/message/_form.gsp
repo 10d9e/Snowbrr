@@ -25,11 +25,11 @@
 		<g:message code="message.content.label" default="Content" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:textField name="content" value="${fieldValue(bean: messageInstance, field: 'content')}" />
+	<g:textArea name="content" value="${fieldValue(bean: messageInstance, field: 'content')}" />
 
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: messageInstance, field: 'read', 'error')} ">
+<div hidden class="fieldcontain ${hasErrors(bean: messageInstance, field: 'read', 'error')} ">
 	<label for="read">
 		<g:message code="message.read.label" default="Read" />
 		

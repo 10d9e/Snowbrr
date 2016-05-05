@@ -6,13 +6,14 @@ import grails.test.mixin.*
 import spock.lang.*
 
 @TestFor(ProviderController)
-@Mock(Provider)
+@Mock([Provider, User])
 @Build( User )
 class ProviderControllerSpec extends Specification {
 
     def populateValidParams(params) {
         assert params != null
-        params << [user: User.build(username: 'user-' + new Date()), companyName: "Snow Blowers Inc"]
+        User testUser = User.build(username: 'test').save()
+        params << [user: testUser, companyName: "Snow Blowers Inc"]
     }
 
     void "Test the index action returns the correct model"() {
@@ -83,6 +84,16 @@ class ProviderControllerSpec extends Specification {
     }
 
     void "Test that the edit action returns the correct model"() {
+        given:
+        def springSecurityService = mockFor(SpringSecurityService)
+        springSecurityService.demand.currentUser{
+            User.build()
+        }
+        springSecurityService.demand.currentUser{
+            User.build()
+        }
+        controller.springSecurityService = springSecurityService.createMock()
+
         when: "The edit action is executed with a null domain"
         controller.edit(null)
 
@@ -99,6 +110,15 @@ class ProviderControllerSpec extends Specification {
     }
 
     void "Test the update action performs an update on a valid domain instance"() {
+        given:
+        def springSecurityService = mockFor(SpringSecurityService)
+
+        springSecurityService.demand.currentUser{
+            User.findByUsername('test2')
+        }
+
+        controller.springSecurityService = springSecurityService.createMock()
+
         when: "Update is called for a domain instance that doesn't exist"
         request.contentType = FORM_CONTENT_TYPE
         request.method = 'PUT'
@@ -119,14 +139,14 @@ class ProviderControllerSpec extends Specification {
         view == 'edit'
         model.providerInstance == provider
 
-        when: "A valid domain instance is passed to the update action"
+        when: "A valid domain instance is passed to the update action with the wrong user"
         response.reset()
         populateValidParams(params)
         provider = new Provider(params).save(flush: true)
         controller.update(provider)
 
         then: "A redirect is issues to the show action"
-        response.redirectedUrl == "/provider/show/$provider.id"
+        response.redirectedUrl == null
         flash.message != null
     }
 

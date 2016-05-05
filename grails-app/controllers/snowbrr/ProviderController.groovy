@@ -61,7 +61,7 @@ class ProviderController {
 
     @Secured(['ROLE_PROVIDER', 'ROLE_ADMIN'])
     def edit(Provider providerInstance) {
-        if(providerInstance.user != springSecurityService.currentUser){
+        if(providerInstance?.user != springSecurityService.currentUser){
             flash.message = 'You do not have access to update this provider.'
             respond providerInstance, view: 'show'
             return

@@ -1,5 +1,5 @@
 
-<button type="button" class="btn btn-info" data-toggle="modal" data-target="#model-${providerInstance.id}">Request</button>
+<button type="button" class="btn btn-success" data-toggle="modal" data-target="#model-${providerInstance.id}">Request</button>
 
 <!-- Modal -->
 <div class="modal fade" id="model-${providerInstance.id}" role="dialog">

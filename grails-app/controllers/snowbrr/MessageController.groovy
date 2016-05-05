@@ -37,6 +37,7 @@ class MessageController {
     }
 
     def create() {
+        params << [ from: springSecurityService.currentUser ]
         respond new Message(params)
     }
 

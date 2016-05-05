@@ -43,7 +43,6 @@ class BootStrap {
         //provider.user.addToMessages(new Message(from: jay, user: provider.user, content: "This is a message", timestamp: new Date()) )
         //provider.user.addToMessages(new Message(from: jay,user: provider.user,  content: "This is a message", timestamp: new Date()) )
 
-
         Consumer.list().each {
             provider.addToReviews([reviewer: it, timestamp: new Date(), rating: randomInt([0..5]), title: 'Awesome!', content: "Maryse was great, cars were moved and she was very nice."])
         }
@@ -65,26 +64,31 @@ class BootStrap {
 
         User user = new User(username: 'homer', password: 'homer', firstname: "Homer", lastname: "Simpson", address: "742 Evergreen Terrace", city: "Springfield",
                 province: "SK", email: "ChunkyLover53@aol.com", country: "United States", latitude: 46.078731, longitude: -64.712379, phone: '506-555-6832').save()
+        UserRole.create user, consumerRole, true
         Consumer consumer = new Consumer(user: user, driveway: new Driveway(length: 100, width: 75))
         save consumer
 
         user = new User(username: 'marge', password: 'marge', firstname: "Marge", lastname: "Simpson", address: "742 Evergreen Terrace", city: "Springfield",
                 province: "SK", email: "marge@aol.com", country: "United States", latitude: 46.078731, longitude: -64.712379, phone: '506-555-6832').save()
+        UserRole.create user, consumerRole, true
         consumer = new Consumer(user: user, driveway: new Driveway(length: 100, width: 75))
         save consumer
 
         user = new User(username: 'lisa', password: 'lisa', firstname: "Lisa", lastname: "Simpson", address: "742 Evergreen Terrace", city: "Springfield",
                 province: "SK", email: "lisa@aol.com", country: "United States", latitude: 46.078731, longitude: -64.712379, phone: '506-555-6832').save()
+        UserRole.create user, consumerRole, true
         consumer = new Consumer(user: user, driveway: new Driveway(length: 100, width: 75))
         save consumer
 
         user = new User(username: 'bart', password: 'bart', firstname: "Bart", lastname: "Simpson", address: "742 Evergreen Terrace", city: "Springfield",
                 province: "SK", email: "bart@aol.com", country: "United States", latitude: 46.078731, longitude: -64.712379, phone: '506-555-6832').save()
+        UserRole.create user, consumerRole, true
         consumer = new Consumer(user: user, driveway: new Driveway(length: 100, width: 75))
         save consumer
 
         user = new User(username: 'maggie', password: 'maggie', firstname: "Maggie", lastname: "Simpson", address: "742 Evergreen Terrace", city: "Springfield",
                 province: "SK", email: "maggie@aol.com", country: "United States", latitude: 46.078731, longitude: -64.712379, phone: '506-555-6832').save()
+        UserRole.create user, consumerRole, true
         consumer = new Consumer(user: user, driveway: new Driveway(length: 100, width: 75))
         save consumer
 

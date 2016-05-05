@@ -57,7 +57,7 @@ class ConsumerController {
 
     @Secured(['ROLE_CONSUMER', 'ROLE_ADMIN'])
     def edit(Consumer consumerInstance) {
-        if(consumerInstance.user != springSecurityService.currentUser){
+        if(consumerInstance?.user != springSecurityService.currentUser){
             flash.message = 'You do not have access to update this customer.'
             respond consumerInstance, view: 'show'
             return

@@ -62,8 +62,7 @@
 								'<b>' + providerInfo.firstname + ' ' +providerInfo.lastname + '</b> </a></p>'+
 								'<p>' + providerInfo.address + '</p>'+
 								'<p>phone: <a href="tel:' + providerInfo.phone + '"> ' + providerInfo.phone + ' </a></p>'+
-								'<p><b><a href="${g.createLink(controller:'provider',action:'show')}/' + providerInfo.id + '" >' +
-								'Request Snow Removal</a></b></p>'+
+
 								'</div>'+
 								'</div>';
 

@@ -36,6 +36,17 @@ class MessageControllerSpec extends Specification {
     }
 
     void "Test the create action returns the correct model"() {
+
+        given:
+        def springSecurityService = mockFor(SpringSecurityService)
+        springSecurityService.demand.currentUser{
+            User.build()
+        }
+        springSecurityService.demand.currentUser{
+            User.build()
+        }
+        controller.springSecurityService = springSecurityService.createMock()
+
         when: "The create action is executed"
         controller.create()
 

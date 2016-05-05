@@ -9,7 +9,6 @@
     <body>
         <div class="nav">
             <span class="menuButton"><a class="home" href="${createLinkTo(dir: '')}"><g:message code="home" default="Home" /></a></span>
-            <span class="menuButton"><g:link class="list" action="list"><g:message code="message.list" default="Message List" /></g:link></span>
         </div>
         <div class="body">
             <h1><g:message code="message.create" default="Create Message" /></h1>
@@ -24,7 +23,7 @@
                     <table>
                         <tbody>
                         
-                            <tr class="prop">
+                            <tr hidden class="prop">
                                 <td valign="top" class="name">
                                     <label for="timestamp"><g:message code="message.timestamp" default="Timestamp" />:</label>
                                 </td>
@@ -34,12 +33,22 @@
                                 </td>
                             </tr>
                         
-                            <tr class="prop">
+                            <tr hidden class="prop">
                                 <td valign="top" class="name">
                                     <label for="from"><g:message code="message.from" default="From" />:</label>
                                 </td>
                                 <td valign="top" class="value ${hasErrors(bean: messageInstance, field: 'from', 'errors')}">
                                     <g:select name="from.id" from="${snowbrr.User.list()}" optionKey="id" value="${messageInstance?.from?.id}"  />
+
+                                </td>
+                            </tr>
+
+                            <tr class="prop">
+                                <td valign="top" class="name">
+                                    <label for="user"><g:message code="message.user" default="To" />:</label>
+                                </td>
+                                <td valign="top" class="value ${hasErrors(bean: messageInstance, field: 'user', 'errors')}">
+                                    <g:select name="user.id" from="${snowbrr.User.list()}" optionKey="id" value="${messageInstance?.user?.id}"  />
 
                                 </td>
                             </tr>
@@ -49,12 +58,12 @@
                                     <label for="content"><g:message code="message.content" default="Content" />:</label>
                                 </td>
                                 <td valign="top" class="value ${hasErrors(bean: messageInstance, field: 'content', 'errors')}">
-                                    <g:textField name="content" value="${fieldValue(bean: messageInstance, field: 'content')}" />
+                                    <g:textArea name="content" value="${fieldValue(bean: messageInstance, field: 'content')}" />
 
                                 </td>
                             </tr>
                         
-                            <tr class="prop">
+                            <tr hidden class="prop">
                                 <td valign="top" class="name">
                                     <label for="read"><g:message code="message.read" default="Read" />:</label>
                                 </td>
@@ -64,15 +73,7 @@
                                 </td>
                             </tr>
                         
-                            <tr class="prop">
-                                <td valign="top" class="name">
-                                    <label for="user"><g:message code="message.user" default="User" />:</label>
-                                </td>
-                                <td valign="top" class="value ${hasErrors(bean: messageInstance, field: 'user', 'errors')}">
-                                    <g:select name="user.id" from="${snowbrr.User.list()}" optionKey="id" value="${messageInstance?.user?.id}"  />
 
-                                </td>
-                            </tr>
                         
                         </tbody>
                     </table>

@@ -83,6 +83,13 @@ class ConsumerControllerSpec extends Specification {
     }
 
     void "Test that the edit action returns the correct model"() {
+        given:
+        def springSecurityService = mockFor(SpringSecurityService)
+        springSecurityService.demand.currentUser{
+            User.build()
+        }
+        controller.springSecurityService = springSecurityService.createMock()
+
         when: "The edit action is executed with a null domain"
         controller.edit(null)
 

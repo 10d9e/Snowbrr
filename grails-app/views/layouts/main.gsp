@@ -74,19 +74,36 @@
 
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav">
-					<li ${controllerName == 'provider' && actionName == 'index' ? 'class=active' : ''}><g:link controller="provider" action="index">Providers</g:link></li>
+					<li ${controllerName == 'provider' && actionName == 'index' ? 'class=active' : ''}>
+						<g:link controller="provider" action="index">
+							<span class="glyphicon glyphicon-road" aria-hidden="true"></span>
+							Providers
+						</g:link>
+					</li>
 					<li ${controllerName == 'transaction' && actionName == 'index' ? 'class=active' : ''}>
 						<g:link controller="transaction" action="index">
+							<span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
 							Transactions
 							<span id="trans" class="badge"></span>
 						</g:link>
 					</li>
 					<li ${controllerName == 'message' && actionName == 'index' ? 'class=active' : ''}>
 						<g:link controller="message" action="index">
+							<span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
 							Messages
 							<span id="unread" class="badge"></span>
 						</g:link>
 					</li>
+
+					<sec:ifAllGranted roles="ROLE_PROVIDER">
+						<li ${controllerName == 'consumer' && actionName == 'index' ? 'class=active' : ''}>
+							<g:link controller="consumer" action="index">
+								<span class="glyphicon glyphicon-heart-empty" aria-hidden="true"></span>
+								Customers
+								<span id="unread" class="badge"></span>
+							</g:link>
+						</li>
+ 					</sec:ifAllGranted>
 
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
@@ -97,11 +114,21 @@
 
 						<li>
 							<sec:ifAllGranted roles="ROLE_PROVIDER">
-								<g:link controller="provider" action="show" id="${Provider.findByUser ( User.findByUsername( sec.username() ) ).id}">Hello, <sec:username/>! <span class="label label-primary">Provider</span></g:link>
+								<g:link controller="provider" action="show" id="${Provider.findByUser ( User.findByUsername( sec.username() ) ).id}">
+									<span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+									Hello, <sec:username/>!
+									<span class="label label-primary">Provider</span>
+								</g:link>
 
 							</sec:ifAllGranted>
 							<sec:ifAllGranted roles="ROLE_CONSUMER">
-								<g:link controller="consumer" action="show" id="${Consumer.findByUser ( User.findByUsername( sec.username() ) ).id}">Hello, <sec:username/>! <span class="label label-default">Customer</span></g:link>
+								<g:link controller="consumer" action="show" id="${Consumer.findByUser ( User.findByUsername( sec.username() ) ).id}">
+									<span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+									Hello, <sec:username/>!
+									<span class="label label-default">
+										Customer
+									</span>
+								</g:link>
 							</sec:ifAllGranted>
 
 							</a>

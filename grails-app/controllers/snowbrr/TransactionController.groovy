@@ -54,6 +54,7 @@ class TransactionController {
         respond transactionInstance
     }
 
+    @Secured('ROLE_CONSUMER')
     def create() {
         respond new Transaction(params)
     }
