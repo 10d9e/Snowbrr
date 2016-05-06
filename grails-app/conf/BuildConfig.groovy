@@ -32,6 +32,9 @@ grails.project.dependency.resolution = {
     checksums true // Whether to verify checksums on resolve
     legacyResolve false // whether to do a secondary resolve on plugin installation, not advised and here for backwards compatibility
 
+    def gebVersion = "0.13.1"
+    def seleniumVersion = "2.51.0"
+
     repositories {
         inherits true // Whether to inherit repository definitions from plugins
 
@@ -52,11 +55,19 @@ grails.project.dependency.resolution = {
         // runtime 'org.postgresql:postgresql:9.3-1101-jdbc41'
         test "org.grails:grails-datastore-test-support:1.0.2-grails-2.4"
 
+        test "org.seleniumhq.selenium:selenium-chrome-driver:$seleniumVersion"
+        test("org.seleniumhq.selenium:selenium-firefox-driver:$seleniumVersion")
+        test "org.seleniumhq.selenium:selenium-support:$seleniumVersion" //required for select tags
+        // You usually only need one of these, but this project uses both
+        test "org.gebish:geb-spock:$gebVersion"
+
     }
 
     plugins {
         // plugins for the build system only
         build ":tomcat:7.0.55.3" // or ":tomcat:8.0.22"
+
+        test ":geb:$gebVersion"
 
         compile "org.grails.plugins:spring-security-core:2.0.0"
 

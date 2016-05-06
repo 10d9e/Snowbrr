@@ -28,28 +28,16 @@ class BootStrap {
         UserRole.create jay, consumerRole, true
         Consumer consumer = new Consumer(user: jay, driveway: new Driveway(length: 100, width: 75))
 
-        //consumer.user.addToMessages(new Message(from: admin, user: consumer.user, content: "This is a message", timestamp: new Date()).save() )
-        //consumer.user.addToMessages(new Message(from: admin, user: consumer.user, content: "This is a message", timestamp: new Date()).save() )
-
         save consumer
-
-        //46.079997, -64.719820
 
         User maryse = new User(username:'maryse', password:'maryse', firstname: "Maryse", lastname: "Arseneau", address: "421 Vanier Street", city: "Dieppe",
                 province: "NB", email: "maryse.g.arseneau@gmail.com", country: "Canada", latitude: 46.079997, longitude: -64.719820, phone: '506-555-5455').save()
         UserRole.create maryse, providerRole, true
         Provider provider = new Provider(user: maryse, companyName: "Snow Blowers Inc")
 
-        //provider.user.addToMessages(new Message(from: jay, user: provider.user, content: "This is a message", timestamp: new Date()) )
-        //provider.user.addToMessages(new Message(from: jay,user: provider.user,  content: "This is a message", timestamp: new Date()) )
-
-        Consumer.list().each {
+        Consumer.list().findAll{ it.user.username != 'jay' }.each {
             provider.addToReviews([reviewer: it, timestamp: new Date(), rating: randomInt([0..5]), title: 'Awesome!', content: "Maryse was great, cars were moved and she was very nice."])
         }
-
-        save provider
-
-        //consumer.addToReviews( new ConsumerReview( reviewer:provider, timestamp: new Date(), rating: randomInt([0..5]), title: 'Awesome!', content: "Did a great job, I can see my pavement again!" ) )
 
         save provider
         save consumer

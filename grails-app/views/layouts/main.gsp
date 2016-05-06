@@ -27,6 +27,7 @@
 		<asset:stylesheet src="main.css" />
 		<g:layoutHead/>
 
+		<sec:ifLoggedIn>
 		<script>
 			$( document ).ready(function() {
 
@@ -56,6 +57,7 @@
 				setInterval(update, 5000);
 			});
 		</script>
+		</sec:ifLoggedIn>
 
 	</head>
 	<body>
@@ -135,7 +137,7 @@
 						</li>
 						<li>
 
-						<g:remoteLink class="logout" controller="logout" method="post" asynchronous="false" onComplete="location.reload()" onSuccess="location.reload()">Logout</g:remoteLink>
+						<g:remoteLink elementId="logout" class="logout" controller="logout" method="post" asynchronous="false" onComplete="location.reload()" onSuccess="location.reload()">Logout</g:remoteLink>
 
 
 					</sec:ifLoggedIn>

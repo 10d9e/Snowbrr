@@ -1,5 +1,5 @@
 
-<button type="button" class="btn btn-success" data-toggle="modal" data-target="#model-${providerInstance.id}">Request</button>
+<button type="button" class="btn btn-success" data-toggle="modal" id="provider-id-${providerInstance.id}" data-target="#model-${providerInstance.id}">Request</button>
 
 <!-- Modal -->
 <div class="modal fade" id="model-${providerInstance.id}" role="dialog">
@@ -18,7 +18,7 @@
             </div>
             <div class="modal-footer">
 
-                <g:link class="btn btn-info" style="color:white;" controller="transaction" action="consumerRequest" params="[providerId: providerInstance.id, targetUri: (request.forwardURI - request.contextPath)]">
+                <g:link elementId="request-${providerInstance.id}" class="btn btn-info" style="color:white;" controller="transaction" action="consumerRequest" params="[providerId: providerInstance.id, targetUri: (request.forwardURI - request.contextPath)]">
                     Request
                 </g:link>
 
