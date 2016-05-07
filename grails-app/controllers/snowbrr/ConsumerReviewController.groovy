@@ -6,7 +6,7 @@ import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
 
 @Transactional(readOnly = true)
-@Secured('ROLE_PROVIDER')
+@Secured(['ROLE_PROVIDER', 'ROLE_ADMIN'])
 class ConsumerReviewController {
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
@@ -78,6 +78,7 @@ class ConsumerReviewController {
         }
     }
 
+    @Secured('ROLE_ADMIN')
     @Transactional
     def delete(ConsumerReview consumerReviewInstance) {
 

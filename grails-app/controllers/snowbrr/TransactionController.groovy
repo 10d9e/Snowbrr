@@ -8,7 +8,7 @@ import grails.transaction.Transactional
 
 
 @Transactional(readOnly = true)
-@Secured(['ROLE_CONSUMER', 'ROLE_PROVIDER'])
+@Secured(['ROLE_CONSUMER', 'ROLE_PROVIDER', 'ROLE_ADMIN'])
 class TransactionController {
 
     def springSecurityService
@@ -200,6 +200,7 @@ class TransactionController {
         }
     }
 
+    @Secured('ROLE_ADMIN')
     @Transactional
     def delete(Transaction transactionInstance) {
 
@@ -219,6 +220,7 @@ class TransactionController {
         }
     }
 
+    @Secured('ROLE_PROVIDER')
     def uploadImage(Transaction transactionInstance) {
 
         if (transactionInstance == null) {

@@ -112,7 +112,6 @@
             <span id="photoProof-label" class="property-label"><g:message code="transaction.photoProof.label"
                                                                           default="Photo Proof"/></span>
 
-
             <a class="example-image-link" href="${createLink(controller:'Transaction', action:'proofImage', id:transactionInstance.id)}" data-lightbox="proofs">
                 <img style="max-width:100px;margin:10px;" class="avatar" src="${createLink(controller:'Transaction', action:'proofImage', id:transactionInstance.id)}" />
             </a>
