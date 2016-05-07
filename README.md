@@ -21,8 +21,9 @@ On both the Provider and Customer side, you can also Rate customers/providers by
 
 It is also note-worthy to view the Provider Profile review tab, where all of the star-ratings, customer comments and rating statistics are displayed for the Provider ( from user 'jay' find and view provider 'maryse' to see a populated example )
 
-### Primary Development Artifacts
-## Domain model
+Primary Development Artifacts
+
+# Domain model
 * Consumer : the customer class which contains a User object for authentication/authorization, owns one Driveway, and can have many ConsumerReviews associated with it.
 * ConsumerReview : The ConsumerReview object is created by a Provider reviewer and owned by a Consumer. There is a content field for the text part of the review and a rating field that is a range between 0 and five.
 * Driveway : Encapsulates a driveway with a length and width
