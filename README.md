@@ -3,10 +3,11 @@
 * CSCIE-56 Final Project
 * Jay Logelin
 * HUID 70970775
- 
+
+# Introduction 
 Snowbrr is a specialized commerce platform for finding and procuring snow removal vendors. In northern climates, snow removal is big business. However the business model still exists in the stone age - usually involving a door to door marketing campaign where vendors lock in customers at a fixed price for an entire season. Customers do not have a centralized place with which to interact with vendors and therefore it is very difficult for both the provider and customer to connect. "Snowbrr" would address these issues by offering both a provider and customer interface. On the provider side, Snowbrr offers offer a set of screens that allows them to set up a profile with customer reviews/comments, photos of equipment and recent jobs finished. On the client side, Snowbrr has a customer profile page with provider reviews/comments, a utility to input driveway dimensions, and list/map view of active snow removal provider from which to choose. Snowbrr uses an MVC model and factors out all of the domain CRUD operations into a set of Gails Services in order to have a single API for the web app and be architecturally ready for a future mobile app.
 
-### Quick Start
+# Quick Start
 
 The application has been designed to have 2 roles associated with it, giving each role a different experience. For example Customers can only rate Providers and vice-versa. So to get up and running, I have created a 'CUSTOMER_ROLE' user 'jay' with password 'jay' and a 'PROVIDER_ROLE' user 'maryse' with password 'maryse'.  You will have to use different http sessions when testing these users out in tandem, so I would recommend using your regular browser for one user and 'In Cognito' for another. ( or, simply, another browser altogther).
 
@@ -31,7 +32,7 @@ It is also note-worthy to view the Provider Profile review tab, where all of the
 * Transaction : A transaction is the primary artifact used for workflow between Customer and Provider.  Transactions are initiated by Providers and the state of the transaction is updated through the lifecycle of the snow removal activity. Transactions contain both one Provider and one Consumer, include several transaction states ( 'Request', 'Cancelled', 'Price Change', 'In Progress', 'Complete' ), have an optional field for photo upload of the completed job, and contain notes for both parties to fill.
 * User/Role/UserRole : The User object is responsible for connecting to the Spring Security Plugin, offering all users authentication and authorization services to different parts of the application.  Fields include email, first and last name, address, phone number, coordinates and an optional avatar image.
 
-## Controllers
+# Controllers
 * ConsumerController :
 
 | Method        | Security Role                 |
@@ -124,9 +125,47 @@ It is also note-worthy to view the Provider Profile review tab, where all of the
 | update        | ROLE_CUSTOMER, ROLE_PROVIDER, ROLE_ADMIN  |
 | delete        | ROLE_ADMIN  |
 
+# Views
+Each view has a correlated standard GSP associated with it ( index, show, create, save, edit, update, delete ), along with the following additions :
 
-###Third Party Dependencies
+### View Templates
+* Provider Request Dialog Template: 'provider/_providerRequestDialog.gsp' is a template used to encapsulate a Provider Request button, popup dialog and url submit to initiate a Transaction
+* Stats Template : 'shared/_stats.gsp' is a template used to render Ratings Statistics for Providers and Consumers.
+* Star Ratings : 'shared/_starRatings.gsp' is a templated used to render and edit a star rating widget for consumer and provider reviews
+* Review Template : 'shared/_review.gsp' is a template used to render a complete listing of the reviews and ratings associated with a Provider or Consumer
+
+### Image Upload/Render/Preview
+* 'transaction/show.gsp' contains an 'g:uploadForm' tag used to upload a file object and works with the controller methods 'uploadImage' and 'proofImage' along with the lightbox jquery plugin to create a nice way to load an image.
+
+#Services
+
+## Message Service
+The MessageService object is responsible for sending messages between Providers, Consumers and the system itself. For example during a Transaction each participant is sent a message during every state change or update.  Messages can also be sent between Users and or Providers using the standard forms.
+
+## ProviderService
+The ProviderService is responsible for producing a list of easy to consume 'ProviderInfo' data objects. It loops through each Provider and creates a list of ProviderInfo objects for the Provider views.
+
+## StatisticsService
+The StatisticsService collects together all of the star ratings for a Provider or Consumer into a list and calculates the averate rating in the form of a 'RatingsStatistics' Value Object.
+
+#TagLibs
+
+## StatisticsTagLib
+The StatisticsTagLib uses the aforementioned Statistics Service to render star widgets, averageRating, and star rating counts and percentages.
+
+usage:
+<stats:renderStars target="${consumerOrProvider}"/>
+<stats:averageRating target="${consumerOrProvider}"/>
+
+##TransactionLabelTagLib
+The TransactionLabelTagLib is responsible for producing a stylized text label based on a Transaction's current status.
+
+sage:
+<trans:label transaction="${transactionInstance}"/>
+
+#Third Party Dependencies
 * spring-security-core:2.0.0
 * build-test-data:2.4.0
 * scaffolding:2.1.2
 * hibernate4:4.3.10
+* lightbox (http://lokeshdhakar.com/projects/lightbox2/)
