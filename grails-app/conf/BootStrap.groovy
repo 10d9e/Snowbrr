@@ -23,8 +23,9 @@ class BootStrap {
         setupConsumers(consumerRole)
         setupProviders(providerRole)
 
+        //46.079935,-64.7200224
         User jay = new User(username:'jay', password:'jay', firstname: "Jay", lastname: "Logelin", address: "421 Vanier Street", city: "Dieppe",
-                province: "NB", email: "jay.logelin@gmail.com", country: "Canada", latitude: 12, longitude: 12).save()
+                province: "NB", email: "jay.logelin@gmail.com", country: "Canada", latitude: 46.079935, longitude: -64.7200224).save()
         UserRole.create jay, consumerRole, true
         Consumer consumer = new Consumer(user: jay, driveway: new Driveway(length: 100, width: 75))
 

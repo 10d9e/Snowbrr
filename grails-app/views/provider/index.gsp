@@ -48,7 +48,6 @@
 
 				$.getJSON("${g.createLink(controller:'provider',action:'list')}", function(data){
 					for (var i = 0, len = data.length; i < len; i++) {
-						console.log(data[i]);
 
 						var providerInfo = data[i];
 

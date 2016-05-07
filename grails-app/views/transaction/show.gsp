@@ -32,8 +32,9 @@
                 <span id="status-label" class="property-label"><g:message code="transaction.status.label"
                                                                           default="Status"/></span>
 
-                <span class="property-value" aria-labelledby="status-label"><g:fieldValue bean="${transactionInstance}"
-                                                                                          field="status"/></span>
+                <span class="property-value" aria-labelledby="status-label"> <trans:label transaction="${transactionInstance}"/></span>
+
+
 
             </li>
         </g:if>
