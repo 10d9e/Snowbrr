@@ -107,24 +107,28 @@
         </g:if>
 
 
-        <li class="fieldcontain">
+            <li class="fieldcontain">
+
+        <g:if test="${transactionInstance?.photoProof}">
 
             <span id="photoProof-label" class="property-label"><g:message code="transaction.photoProof.label"
-                                                                          default="Photo Proof"/></span>
+                                                                              default="Photo Proof"/></span>
 
-            <a class="example-image-link" href="${createLink(controller:'Transaction', action:'proofImage', id:transactionInstance.id)}" data-lightbox="proofs">
-                <img style="max-width:100px;margin:10px;" class="avatar" src="${createLink(controller:'Transaction', action:'proofImage', id:transactionInstance.id)}" />
-            </a>
+                <a class="example-image-link" href="${createLink(controller:'Transaction', action:'proofImage', id:transactionInstance.id)}" data-lightbox="proofs">
+                    <img style="max-width:100px;margin:10px;" class="avatar" src="${createLink(controller:'Transaction', action:'proofImage', id:transactionInstance.id)}" />
+                </a>
+        </g:if>
 
-            <sec:ifAllGranted roles="ROLE_PROVIDER">
-                <g:uploadForm url="[resource:transactionInstance, action:'uploadImage']">
-                    <span class="property-value" aria-labelledby="price-label">
-                       <input type="file" name="photoProof" id="photoProof" />
-                       <input type="submit" class="btn btn-default" value="Upload Photo" />
-                    </span>
-                </g:uploadForm>
-            </sec:ifAllGranted>
-        </li>
+                <sec:ifAllGranted roles="ROLE_PROVIDER">
+                    <g:uploadForm url="[resource:transactionInstance, action:'uploadImage']">
+                        <span class="property-value" aria-labelledby="price-label">
+                           <input type="file" name="photoProof" id="photoProof" />
+                           <input type="submit" class="btn btn-default" value="Upload Photo" />
+                        </span>
+                    </g:uploadForm>
+                </sec:ifAllGranted>
+            </li>
+
 
 
     </ol>
@@ -155,9 +159,7 @@
 
             <g:link class="edit" action="edit" resource="${transactionInstance}"><g:message
                     code="default.button.edit.label" default="Edit"/></g:link>
-            <g:actionSubmit class="delete" action="delete"
-                            value="${message(code: 'default.button.delete.label', default: 'Delete')}"
-                            onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');"/>
+
         </fieldset>
     </g:form>
 </div>

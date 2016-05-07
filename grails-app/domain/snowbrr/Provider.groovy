@@ -15,5 +15,6 @@ class Provider {
     static constraints = {
         user nullable: false
         companyName nullable: false
+        initialPrice nullable: false
     }
 }

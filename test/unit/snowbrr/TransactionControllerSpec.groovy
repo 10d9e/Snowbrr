@@ -143,11 +143,263 @@ class TransactionControllerSpec extends Specification {
         view == 'edit'
         model.transactionInstance == transaction
 
+
         when: "A valid domain instance is passed to the update action"
         response.reset()
         populateValidParams(params)
         transaction = new Transaction(params).save(flush: true)
         controller.update(transaction)
+
+        then: "A redirect is issues to the show action"
+        response.redirectedUrl == "/transaction/show/$transaction.id"
+        flash.message != null
+    }
+
+
+    void "Test the providerComplete action performs an update on a valid domain instance"() {
+
+        given:
+        def springSecurityService = mockFor(SpringSecurityService)
+        springSecurityService.demand.currentUser{
+            User.build()
+        }
+        springSecurityService.demand.currentUser{
+            User.build()
+        }
+        controller.springSecurityService = springSecurityService.createMock()
+
+        def messageService = mockFor(MessageService)
+        messageService.demand.send(){ }
+        messageService.demand.send(){ }
+        controller.messageService = messageService.createMock()
+
+        when: "Update is called for a domain instance that doesn't exist"
+        request.contentType = FORM_CONTENT_TYPE
+        request.method = 'PUT'
+        controller.providerComplete(null)
+
+        then: "A 404 error is returned"
+        response.redirectedUrl == '/transaction/index'
+        flash.message != null
+
+
+        when: "An invalid domain instance is passed to the update action"
+        response.reset()
+        def transaction = new Transaction()
+        transaction.validate()
+        controller.providerComplete(transaction)
+
+        then: "The show view is rendered again with the invalid instance"
+        view == 'show'
+        model.transactionInstance == transaction
+
+
+        when: "An invalid domain instance state is passed to the update action"
+        response.reset()
+        populateValidParams(params)
+        transaction = new Transaction(params)
+        transaction.status = 'Request'
+        transaction.save(flush:true)
+        transaction.validate()
+        controller.providerComplete(transaction)
+
+        then: "The edit view is rendered again with the invalid instance"
+        view == 'show'
+        flash.message != null
+
+        when: "A valid domain instance is passed to the update action"
+        response.reset()
+        populateValidParams(params)
+        transaction = new Transaction(params).save(flush: true)
+        transaction.validate()
+        controller.providerComplete(transaction)
+
+        then: "A redirect is issues to the show action"
+        response.redirectedUrl == "/transaction/show/$transaction.id"
+        flash.message != null
+    }
+
+    void "Test the providerAccept action performs an update on a valid domain instance"() {
+
+        given:
+        def springSecurityService = mockFor(SpringSecurityService)
+        springSecurityService.demand.currentUser{
+            User.build()
+        }
+        springSecurityService.demand.currentUser{
+            User.build()
+        }
+        controller.springSecurityService = springSecurityService.createMock()
+
+        def messageService = mockFor(MessageService)
+        messageService.demand.send(){ }
+        messageService.demand.send(){ }
+        controller.messageService = messageService.createMock()
+
+        when: "Update is called for a domain instance that doesn't exist"
+        request.contentType = FORM_CONTENT_TYPE
+        request.method = 'PUT'
+        controller.providerAccept(null)
+
+        then: "A 404 error is returned"
+        response.redirectedUrl == '/transaction/index'
+        flash.message != null
+
+
+        when: "An invalid domain instance is passed to the update action"
+        response.reset()
+        def transaction = new Transaction()
+        transaction.validate()
+        controller.providerAccept(transaction)
+
+        then: "The show view is rendered again with the invalid instance"
+        view == 'show'
+        model.transactionInstance == transaction
+
+
+        when: "An invalid domain instance state is passed to the update action"
+        response.reset()
+        populateValidParams(params)
+        transaction = new Transaction(params)
+        transaction.status = 'Request'
+        transaction.save(flush:true)
+        transaction.validate()
+        controller.providerAccept(transaction)
+
+        then: "The edit view is rendered again with the invalid instance"
+        view == 'show'
+        flash.message != null
+
+        when: "A valid domain instance is passed to the update action"
+        response.reset()
+        populateValidParams(params)
+        transaction = new Transaction(params).save(flush: true)
+        controller.providerAccept(transaction)
+
+        then: "A redirect is issues to the show action"
+        response.redirectedUrl == "/transaction/show/$transaction.id"
+        flash.message != null
+    }
+
+
+    void "Test the providerCancel action performs an update on a valid domain instance"() {
+
+        given:
+        def springSecurityService = mockFor(SpringSecurityService)
+        springSecurityService.demand.currentUser{
+            User.build()
+        }
+        springSecurityService.demand.currentUser{
+            User.build()
+        }
+        controller.springSecurityService = springSecurityService.createMock()
+
+        def messageService = mockFor(MessageService)
+        messageService.demand.send(){ }
+        messageService.demand.send(){ }
+        controller.messageService = messageService.createMock()
+
+        when: "Update is called for a domain instance that doesn't exist"
+        request.contentType = FORM_CONTENT_TYPE
+        request.method = 'PUT'
+        controller.providerCancel(null)
+
+        then: "A 404 error is returned"
+        response.redirectedUrl == '/transaction/index'
+        flash.message != null
+
+
+        when: "An invalid domain instance is passed to the update action"
+        response.reset()
+        def transaction = new Transaction()
+        transaction.validate()
+        controller.providerCancel(transaction)
+
+        then: "The show view is rendered again with the invalid instance"
+        view == 'show'
+        model.transactionInstance == transaction
+
+
+        when: "An invalid domain instance state is passed to the update action"
+        response.reset()
+        populateValidParams(params)
+        transaction = new Transaction(params)
+        transaction.status = 'Complete'
+        transaction.save(flush:true)
+        transaction.validate()
+        controller.providerCancel(transaction)
+
+        then: "The edit view is rendered again with the invalid instance"
+        view == 'show'
+        flash.message != null
+
+        when: "A valid domain instance is passed to the update action"
+        response.reset()
+        populateValidParams(params)
+        transaction = new Transaction(params).save(flush: true)
+        controller.providerCancel(transaction)
+
+        then: "A redirect is issues to the show action"
+        response.redirectedUrl == "/transaction/show/$transaction.id"
+        flash.message != null
+    }
+
+    void "Test the consumerCancel action performs an update on a valid domain instance"() {
+
+        given:
+        def springSecurityService = mockFor(SpringSecurityService)
+        springSecurityService.demand.currentUser{
+            User.build()
+        }
+        springSecurityService.demand.currentUser{
+            User.build()
+        }
+        controller.springSecurityService = springSecurityService.createMock()
+
+        def messageService = mockFor(MessageService)
+        messageService.demand.send(){ }
+        messageService.demand.send(){ }
+        controller.messageService = messageService.createMock()
+
+        when: "Update is called for a domain instance that doesn't exist"
+        request.contentType = FORM_CONTENT_TYPE
+        request.method = 'PUT'
+        controller.consumerCancel(null)
+
+        then: "A 404 error is returned"
+        response.redirectedUrl == '/transaction/index'
+        flash.message != null
+
+
+        when: "An invalid domain instance is passed to the update action"
+        response.reset()
+        def transaction = new Transaction()
+        transaction.validate()
+        controller.consumerCancel(transaction)
+
+        then: "The show view is rendered again with the invalid instance"
+        view == 'show'
+        model.transactionInstance == transaction
+
+
+        when: "An invalid domain instance state is passed to the update action"
+        response.reset()
+        populateValidParams(params)
+        transaction = new Transaction(params)
+        transaction.status = 'Complete'
+        transaction.save(flush:true)
+        transaction.validate()
+        controller.consumerCancel(transaction)
+
+        then: "The edit view is rendered again with the invalid instance"
+        view == 'show'
+        flash.message != null
+
+        when: "A valid domain instance is passed to the update action"
+        response.reset()
+        populateValidParams(params)
+        transaction = new Transaction(params).save(flush: true)
+        controller.consumerCancel(transaction)
 
         then: "A redirect is issues to the show action"
         response.redirectedUrl == "/transaction/show/$transaction.id"

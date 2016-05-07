@@ -64,13 +64,4 @@ class TransactionSpec extends Specification {
         assertTrue transaction.errors.hasFieldErrors('finishBy')
     }
 
-    void "test Transaction fails when finishBy is invalid"() {
-        when:
-        def transaction = new Transaction(consumer: Consumer.build(), photoProof: imageBytes, provider: Provider.build(), price: 50, status: "In Progress", finishBy: new Date() - 1, consumerNotes: "I would like to have this done before the big storm")
-
-        then:
-        assertFalse transaction.validate()
-        assertTrue transaction.errors.hasFieldErrors('finishBy')
-    }
-
 }

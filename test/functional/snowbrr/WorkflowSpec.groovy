@@ -180,9 +180,6 @@ class WorkflowSpec extends GebReportingSpec {
         createButton.click()
 
         then:
-
-
-
         logoutButton.click()
 
     }
@@ -193,6 +190,7 @@ class WorkflowSpec extends GebReportingSpec {
         loginForm.j_username = "jay"
         loginForm.j_password = "jay"
         loginButton.click()
+
         to ProviderReviewPage
 
         when:

@@ -108,7 +108,9 @@ class TransactionController {
         transactionInstance.status = 'Request'
         transactionInstance.finishBy = new Date()
         transactionInstance.price = provider.initialPrice
-        update transactionInstance
+
+        mutateTransaction transactionInstance
+        transactionInstance.save flush: true
 
         messageService.send(User.findByUsername('admin'), transactionInstance.consumer.user, 'You have created a new transaction request with ' + transactionInstance.provider.companyName)
         messageService.send(User.findByUsername('admin'), transactionInstance.provider.user, "${transactionInstance.consumer.user.firstname} ${transactionInstance.consumer.user.lastname} would like to Request a new transaction with you.")
@@ -125,12 +127,29 @@ class TransactionController {
 
     @Secured('ROLE_CONSUMER')
     def consumerCancel(Transaction transactionInstance) {
+
+        if (transactionInstance == null) {
+            notFound()
+            return
+        }
+
+        if (transactionInstance.hasErrors()) {
+            respond transactionInstance.errors, view: 'show'
+            return
+        }
+
+        if(transactionInstance.status == 'Cancel' || transactionInstance.status == 'Complete') {
+            flash.message = 'You cannot Cancel a transaction that is already Cancelled or Complete.'
+            redirect transactionInstance
+            return
+        }
+
         transactionInstance.status = 'Cancelled'
-        update transactionInstance
+        mutateTransaction transactionInstance
+        transactionInstance.save flush: true
 
         messageService.send(User.findByUsername('admin'), transactionInstance.consumer.user, "You have cancelled request for snow removal with ${transactionInstance.provider.companyName}")
         messageService.send(User.findByUsername('admin'), transactionInstance.provider.user, "${transactionInstance.consumer.user.firstname} ${transactionInstance.consumer.user.lastname} has cancelled the transaction")
-
 
         flash.message = 'Transaction has been cancelled'
         redirect transactionInstance
@@ -138,12 +157,29 @@ class TransactionController {
 
     @Secured('ROLE_PROVIDER')
     def providerAccept(Transaction transactionInstance) {
+
+        if (transactionInstance == null) {
+            notFound()
+            return
+        }
+
+        if (transactionInstance.hasErrors()) {
+            respond transactionInstance.errors, view: 'show'
+            return
+        }
+
+        if(transactionInstance.status != 'Request') {
+            flash.message = 'You cannot Accept a transaction that is not in the Request State.'
+            redirect transactionInstance
+            return
+        }
+
         transactionInstance.status = 'In Progress'
-        update transactionInstance
+        mutateTransaction transactionInstance
+        transactionInstance.save flush: true
 
         messageService.send(User.findByUsername('admin'), transactionInstance.consumer.user, "${transactionInstance.provider.companyName} has accepted your transaction request")
         messageService.send(User.findByUsername('admin'), transactionInstance.provider.user, "You have accepted request for snow removal for ${transactionInstance.consumer.user.firstname} ${transactionInstance.consumer.user.lastname}")
-
 
         flash.message = 'Transaction has been accepted'
         redirect transactionInstance
@@ -151,8 +187,26 @@ class TransactionController {
 
     @Secured('ROLE_PROVIDER')
     def providerCancel(Transaction transactionInstance) {
+
+        if (transactionInstance == null) {
+            notFound()
+            return
+        }
+
+        if (transactionInstance.hasErrors()) {
+            respond transactionInstance.errors, view: 'show'
+            return
+        }
+
+        if(transactionInstance.status == 'Cancel' || transactionInstance.status == 'Complete') {
+            flash.message = 'You cannot Cancel a transaction that is already Cancelled or Complete.'
+            redirect transactionInstance
+            return
+        }
+
         transactionInstance.status = 'Cancelled'
-        update transactionInstance
+        mutateTransaction transactionInstance
+        transactionInstance.save flush: true
 
         messageService.send(User.findByUsername('admin'), transactionInstance.consumer.user, "${transactionInstance.provider.companyName} has cancelled your transaction request")
         messageService.send(User.findByUsername('admin'), transactionInstance.provider.user, "You have cancelled request for snow removal for ${transactionInstance.consumer.user.firstname} ${transactionInstance.consumer.user.lastname}")
@@ -164,8 +218,26 @@ class TransactionController {
 
     @Secured('ROLE_PROVIDER')
     def providerComplete(Transaction transactionInstance) {
+
+        if (transactionInstance == null) {
+            notFound()
+            return
+        }
+
+        if (transactionInstance.hasErrors()) {
+            respond transactionInstance.errors, view: 'show'
+            return
+        }
+
+        if(transactionInstance.status != 'In Progress') {
+            flash.message = 'You cannot Complete a transaction that has not yet been Started.'
+            redirect transactionInstance
+            return
+        }
+
         transactionInstance.status = 'Complete'
-        update transactionInstance
+        mutateTransaction transactionInstance
+        transactionInstance.save flush: true
 
         messageService.send(User.findByUsername('admin'), transactionInstance.consumer.user, "${transactionInstance.provider.companyName} has completed your transaction request. Don't forget to rate your experience with this provider.")
         messageService.send(User.findByUsername('admin'), transactionInstance.provider.user, "You have completed work for ${transactionInstance.consumer.user.firstname} ${transactionInstance.consumer.user.lastname}. Don't forget to rate your experience with this client.")

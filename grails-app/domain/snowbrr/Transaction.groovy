@@ -18,7 +18,7 @@ class Transaction implements Comparable<Transaction>{
 
     static constraints = {
         status inList: ['Request', 'Cancelled', 'Price Change', 'In Progress', 'Complete'], nullable: false
-        finishBy (nullable: false, min: new Date() )
+        finishBy (nullable: false )
         photoProof nullable: true, maxSize: 10485760
         providerNotes nullable: true
         consumerNotes nullable: true
@@ -27,7 +27,7 @@ class Transaction implements Comparable<Transaction>{
     }
 
     int compareTo(Transaction other){
-        other.finishBy.compareTo(this.finishBy)
+        this.finishBy? other?.finishBy.compareTo(this?.finishBy) : -1
     }
 
 }
