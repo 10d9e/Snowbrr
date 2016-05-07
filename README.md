@@ -20,6 +20,111 @@ On both the Provider and Customer side, you can also Rate customers/providers by
 
 It is also note-worthy to view the Provider Profile review tab, where all of the star-ratings, customer comments and rating statistics are displayed for the Provider ( from user 'jay' find and view provider 'maryse' to see a populated example )
 
+### Primary Development Artifacts
+## Domain model
+* Consumer : the customer class which contains a User object for authentication/authorization, owns one Driveway, and can have many ConsumerReviews associated with it.
+* ConsumerReview : The ConsumerReview object is created by a Provider reviewer and owned by a Consumer. There is a content field for the text part of the review and a rating field that is a range between 0 and five.
+* Driveway : Encapsulates a driveway with a length and width
+* Message : A simple message object for sending messages between different User ( Customer, Provider and System) Inboxes. 
+* Provider : A Provider is a person or company that provides a snowblowing service. Providers can set a blanket initialPrice for the start of a transaction, and have zero to many ProviderReviews associated.
+* ProviderReview : A ProviderReview is created by a Consumer reviewer and owned by a Provider. There is a content field for the text part of the review and a rating field that is a range between 0 and five.
+* Transaction : A transaction is the primary artifact used for workflow between Customer and Provider.  Transactions are initiated by Providers and the state of the transaction is updated through the lifecycle of the snow removal activity. Transactions contain both one Provider and one Consumer, include several transaction states ( 'Request', 'Cancelled', 'Price Change', 'In Progress', 'Complete' ), have an optional field for photo upload of the completed job, and contain notes for both parties to fill.
+* User/Role/UserRole : The User object is responsible for connecting to the Spring Security Plugin, offering all users authentication and authorization services to different parts of the application.  Fields include email, first and last name, address, phone number, coordinates and an optional avatar image.
+
+## Controllers
+* ConsumerController :
+
+| Method        | Security Role                 |
+| ------------- | ----------------------------- |
+| index         | ROLE_CUSTOMER, ROLE_PROVIDER, ROLE_ADMIN  |
+| map           | ROLE_CUSTOMER, ROLE_PROVIDER, ROLE_ADMIN  |
+| show          | ROLE_CUSTOMER, ROLE_PROVIDER, ROLE_ADMIN  |
+| create        | ROLE_CUSTOMER, ROLE_PROVIDER, ROLE_ADMIN  |
+| save          | ROLE_CUSTOMER, ROLE_PROVIDER, ROLE_ADMIN  |
+| edit          | ROLE_CUSTOMER, ROLE_PROVIDER, ROLE_ADMIN  |
+| update        | ROLE_CUSTOMER, ROLE_PROVIDER, ROLE_ADMIN  |
+| delete        | ROLE_ADMIN  |
+
+* ConsumerReviewController :
+
+| Method        | Security Role              |
+| ------------- | -------------------------- |
+| index         | ROLE_PROVIDER, ROLE_ADMIN  |
+| show          | ROLE_PROVIDER, ROLE_ADMIN  |
+| create        | ROLE_CUSTOMER, ROLE_ADMIN  |
+| save          | ROLE_CUSTOMER, ROLE_ADMIN  |
+| edit          | ROLE_CUSTOMER, ROLE_ADMIN  |
+| update        | ROLE_CUSTOMER, ROLE_ADMIN  |
+| delete        | ROLE_ADMIN                 |
+
+* MessageController :
+
+| Method        | Security Role                             |
+| ------------- | ----------------------------------------- |
+| index         | ROLE_CUSTOMER, ROLE_PROVIDER, ROLE_ADMIN  |
+| show          | ROLE_CUSTOMER, ROLE_PROVIDER, ROLE_ADMIN  |
+| create        | ROLE_CUSTOMER, ROLE_PROVIDER, ROLE_ADMIN  |
+| save          | ROLE_CUSTOMER, ROLE_PROVIDER, ROLE_ADMIN  |
+| edit          | ROLE_CUSTOMER, ROLE_PROVIDER, ROLE_ADMIN  |
+| update        | ROLE_CUSTOMER, ROLE_PROVIDER, ROLE_ADMIN  |
+| delete        | ROLE_CUSTOMER, ROLE_PROVIDER, ROLE_ADMIN  |
+
+* MessageController :
+
+| Method        | Security Role                             |
+| ------------- | ----------------------------------------- |
+| index         | ROLE_CUSTOMER, ROLE_PROVIDER, ROLE_ADMIN  |
+| show          | ROLE_CUSTOMER, ROLE_PROVIDER, ROLE_ADMIN  |
+| create        | ROLE_CUSTOMER, ROLE_PROVIDER, ROLE_ADMIN  |
+| save          | ROLE_CUSTOMER, ROLE_PROVIDER, ROLE_ADMIN  |
+| edit          | ROLE_CUSTOMER, ROLE_PROVIDER, ROLE_ADMIN  |
+| update        | ROLE_CUSTOMER, ROLE_PROVIDER, ROLE_ADMIN  |
+| delete        | ROLE_CUSTOMER, ROLE_PROVIDER, ROLE_ADMIN  |
+
+* ProviderController :
+
+| Method        | Security Role                             |
+| ------------- | ----------------------------------------- |
+| index         | ROLE_CUSTOMER, ROLE_PROVIDER, ROLE_ADMIN  |
+| show          | ROLE_CUSTOMER, ROLE_PROVIDER, ROLE_ADMIN  |
+| create        | ROLE_PROVIDER, ROLE_ADMIN  |
+| save          | ROLE_PROVIDER, ROLE_ADMIN  |
+| edit          | ROLE_PROVIDER, ROLE_ADMIN  |
+| update        | ROLE_PROVIDER, ROLE_ADMIN  |
+| delete        | ROLE_ADMIN  |
+
+* ProviderReviewController :
+
+| Method        | Security Role                             |
+| ------------- | ----------------------------------------- |
+| index         | ROLE_CUSTOMER, ROLE_PROVIDER, ROLE_ADMIN  |
+| show          | ROLE_CUSTOMER, ROLE_PROVIDER, ROLE_ADMIN  |
+| create        | ROLE_PROVIDER, ROLE_ADMIN  |
+| save          | ROLE_PROVIDER, ROLE_ADMIN  |
+| edit          | ROLE_PROVIDER, ROLE_ADMIN  |
+| update        | ROLE_PROVIDER, ROLE_ADMIN  |
+| delete        | ROLE_ADMIN  |
+
+* TransactionController :
+
+| Method        | Security Role                             |
+| ------------- | ----------------------------------------- |
+| index         | ROLE_CUSTOMER, ROLE_PROVIDER, ROLE_ADMIN  |
+| show          | ROLE_CUSTOMER, ROLE_PROVIDER, ROLE_ADMIN  |
+| consumerRequest | ROLE_CONSUMER |
+| consumerCancel | ROLE_CONSUMER |
+| providerAccept | ROLE_PROVIDER |
+| providerCancel | ROLE_PROVIDER |
+| providerComplete | ROLE_PROVIDER |
+| uploadImage | ROLE_PROVIDER |
+| proofImage | ROLE_CUSTOMER, ROLE_PROVIDER, ROLE_ADMIN |
+| create        | ROLE_CUSTOMER  |
+| save          | ROLE_CUSTOMER, ROLE_PROVIDER, ROLE_ADMIN  |
+| edit          | ROLE_CUSTOMER, ROLE_PROVIDER, ROLE_ADMIN  |
+| update        | ROLE_CUSTOMER, ROLE_PROVIDER, ROLE_ADMIN  |
+| delete        | ROLE_ADMIN  |
+
+
 ###Third Party Dependencies
 * spring-security-core:2.0.0
 * build-test-data:2.4.0
