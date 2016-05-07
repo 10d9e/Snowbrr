@@ -21,9 +21,9 @@ On both the Provider and Customer side, you can also Rate customers/providers by
 
 It is also note-worthy to view the Provider Profile review tab, where all of the star-ratings, customer comments and rating statistics are displayed for the Provider ( from user 'jay' find and view provider 'maryse' to see a populated example )
 
-Primary Development Artifacts
+#Primary Development Artifacts
 
-# Domain model
+## Domain model
 * Consumer : the customer class which contains a User object for authentication/authorization, owns one Driveway, and can have many ConsumerReviews associated with it.
 * ConsumerReview : The ConsumerReview object is created by a Provider reviewer and owned by a Consumer. There is a content field for the text part of the review and a rating field that is a range between 0 and five.
 * Driveway : Encapsulates a driveway with a length and width
@@ -33,7 +33,7 @@ Primary Development Artifacts
 * Transaction : A transaction is the primary artifact used for workflow between Customer and Provider.  Transactions are initiated by Providers and the state of the transaction is updated through the lifecycle of the snow removal activity. Transactions contain both one Provider and one Consumer, include several transaction states ( 'Request', 'Cancelled', 'Price Change', 'In Progress', 'Complete' ), have an optional field for photo upload of the completed job, and contain notes for both parties to fill.
 * User/Role/UserRole : The User object is responsible for connecting to the Spring Security Plugin, offering all users authentication and authorization services to different parts of the application.  Fields include email, first and last name, address, phone number, coordinates and an optional avatar image.
 
-# Controllers
+## Controllers
 * ConsumerController :
 
 | Method        | Security Role                 |
@@ -126,39 +126,39 @@ Primary Development Artifacts
 | update        | ROLE_CUSTOMER, ROLE_PROVIDER, ROLE_ADMIN  |
 | delete        | ROLE_ADMIN  |
 
-# Views
+## Views
 Each view has a correlated standard GSP associated with it ( index, show, create, save, edit, update, delete ), along with the following additions :
 
-### View Templates
+#### View Templates
 * Provider Request Dialog Template: 'provider/_providerRequestDialog.gsp' is a template used to encapsulate a Provider Request button, popup dialog and url submit to initiate a Transaction
 * Stats Template : 'shared/_stats.gsp' is a template used to render Ratings Statistics for Providers and Consumers.
 * Star Ratings : 'shared/_starRatings.gsp' is a templated used to render and edit a star rating widget for consumer and provider reviews
 * Review Template : 'shared/_review.gsp' is a template used to render a complete listing of the reviews and ratings associated with a Provider or Consumer
 
-### Image Upload/Render/Preview
+#### Image Upload/Render/Preview
 * 'transaction/show.gsp' contains an 'g:uploadForm' tag used to upload a file object and works with the controller methods 'uploadImage' and 'proofImage' along with the lightbox jquery plugin to create a nice way to load an image.
 
-#Services
+##Services
 
-## Message Service
+### Message Service
 The MessageService object is responsible for sending messages between Providers, Consumers and the system itself. For example during a Transaction each participant is sent a message during every state change or update.  Messages can also be sent between Users and or Providers using the standard forms.
 
-## ProviderService
+### ProviderService
 The ProviderService is responsible for producing a list of easy to consume 'ProviderInfo' data objects. It loops through each Provider and creates a list of ProviderInfo objects for the Provider views.
 
-## StatisticsService
+### StatisticsService
 The StatisticsService collects together all of the star ratings for a Provider or Consumer into a list and calculates the averate rating in the form of a 'RatingsStatistics' Value Object.
 
-#TagLibs
+##TagLibs
 
-## StatisticsTagLib
+### StatisticsTagLib
 The StatisticsTagLib uses the aforementioned Statistics Service to render star widgets, averageRating, and star rating counts and percentages.
 
 usage:
 <stats:renderStars target="${consumerOrProvider}"/>
 <stats:averageRating target="${consumerOrProvider}"/>
 
-##TransactionLabelTagLib
+###TransactionLabelTagLib
 The TransactionLabelTagLib is responsible for producing a stylized text label based on a Transaction's current status.
 
 sage:
