@@ -34,8 +34,6 @@ class LoginSpec extends GebReportingSpec {
 
         then: "I am being redirected to the homepage"
         at HomePage
-        providerMaryseButton.click()
-        requestMaryseButton.click()
         logoutButton.click()
     }
 

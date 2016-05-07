@@ -13,6 +13,8 @@ import spock.lang.Specification
 @Build([ Provider, Consumer ])
 class TransactionSpec extends Specification {
 
+    def imageBytes = new File("test/unit/snowbrr/driveway.jpg").bytes
+
     def setup() {
     }
 
@@ -21,7 +23,7 @@ class TransactionSpec extends Specification {
 
     void "test create valid Transaction"() {
         when:
-        def transaction = new Transaction(consumer: Consumer.build(), provider: Provider.build(), price: 50, status: "In Progress", finishBy: new Date() + 1, consumerNotes: "I would like to have this done before the big storm")
+        def transaction = new Transaction(consumer: Consumer.build(), provider: Provider.build(), photoProof: imageBytes, price: 50, status: "In Progress", finishBy: new Date() + 1, consumerNotes: "I would like to have this done before the big storm")
 
         then:
         assertTrue transaction.validate()
@@ -29,7 +31,7 @@ class TransactionSpec extends Specification {
 
     void "test Transaction validates when consumer is null"() {
         when:
-        def transaction = new Transaction(provider: Provider.build(), price: 50, status: "In Progress", finishBy: new Date() + 1, consumerNotes: "I would like to have this done before the big storm")
+        def transaction = new Transaction(provider: Provider.build(), photoProof: imageBytes, price: 50, status: "In Progress", finishBy: new Date() + 1, consumerNotes: "I would like to have this done before the big storm")
 
         then:
         assertTrue transaction.validate()
@@ -37,7 +39,7 @@ class TransactionSpec extends Specification {
 
     void "test Transaction fails when status is null"() {
         when:
-        def transaction = new Transaction(consumer: Consumer.build(), provider: Provider.build(), price: 50, status: null, finishBy: new Date() + 1, consumerNotes: "I would like to have this done before the big storm")
+        def transaction = new Transaction(consumer: Consumer.build(), photoProof: imageBytes, provider: Provider.build(), price: 50, status: null, finishBy: new Date() + 1, consumerNotes: "I would like to have this done before the big storm")
 
         then:
         assertFalse transaction.validate()
@@ -46,7 +48,7 @@ class TransactionSpec extends Specification {
 
     void "test Transaction fails when status is invalid"() {
         when:
-        def transaction = new Transaction(consumer: Consumer.build(), provider: Provider.build(), price: 50, status: "jsdklsdf", finishBy: new Date() + 1, consumerNotes: "I would like to have this done before the big storm")
+        def transaction = new Transaction(consumer: Consumer.build(), photoProof: imageBytes, provider: Provider.build(), price: 50, status: "jsdklsdf", finishBy: new Date() + 1, consumerNotes: "I would like to have this done before the big storm")
 
         then:
         assertFalse transaction.validate()
@@ -55,7 +57,7 @@ class TransactionSpec extends Specification {
 
     void "test Transaction fails when finishBy is null"() {
         when:
-        def transaction = new Transaction(consumer: Consumer.build(), provider: Provider.build(), price: 50, status: "In Progress", consumerNotes: "I would like to have this done before the big storm")
+        def transaction = new Transaction(consumer: Consumer.build(), photoProof: imageBytes, provider: Provider.build(), price: 50, status: "In Progress", consumerNotes: "I would like to have this done before the big storm")
 
         then:
         assertFalse transaction.validate()
@@ -64,7 +66,7 @@ class TransactionSpec extends Specification {
 
     void "test Transaction fails when finishBy is invalid"() {
         when:
-        def transaction = new Transaction(consumer: Consumer.build(), provider: Provider.build(), price: 50, status: "In Progress", finishBy: new Date() - 1, consumerNotes: "I would like to have this done before the big storm")
+        def transaction = new Transaction(consumer: Consumer.build(), photoProof: imageBytes, provider: Provider.build(), price: 50, status: "In Progress", finishBy: new Date() - 1, consumerNotes: "I would like to have this done before the big storm")
 
         then:
         assertFalse transaction.validate()

@@ -10,6 +10,8 @@ import spock.lang.*
 @Build([ Provider, Consumer, User ])
 class TransactionControllerSpec extends Specification {
 
+    def imageBytes = new File("test/unit/snowbrr/driveway.jpg").bytes
+
     def populateValidParams(params) {
         assert params != null
         params << [consumer: Consumer.build(), provider: Provider.build(), price: 50, status: "In Progress", finishBy: new Date() + 1, consumerNotes: "I would like to have this done before the big storm"]
@@ -176,6 +178,23 @@ class TransactionControllerSpec extends Specification {
         then: "The instance is deleted"
         Transaction.count() == 0
         response.redirectedUrl == '/transaction/index'
+        flash.message != null
+    }
+
+    void "Test that the uploadImage action returns the correct model"() {
+        when: "The edit action is executed with a null domain"
+        controller.edit(null)
+
+        then: "A 404 error is returned"
+        response.status == 404
+
+        when: "A domain instance is passed to the edit action"
+        populateValidParams(params)
+        def transaction = new Transaction(params).save()
+        request.addFile('photoProof', imageBytes)
+        controller.uploadImage(transaction)
+
+        then: "A model is populated containing the domain instance"
         flash.message != null
     }
 }

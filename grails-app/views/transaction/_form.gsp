@@ -23,15 +23,6 @@
 
 <sec:ifAllGranted roles="ROLE_PROVIDER">
 
-<div class="fieldcontain ${hasErrors(bean: transactionInstance, field: 'photoProof', 'error')} ">
-    <label for="photoProof">
-        <g:message code="transaction.photoProof.label" default="Photo Proof"/>
-
-    </label>
-    <input type="file" id="photoProof" name="photoProof"/>
-
-</div>
-
 <div class="fieldcontain ${hasErrors(bean: transactionInstance, field: 'providerNotes', 'error')} ">
     <label for="providerNotes">
         <g:message code="transaction.providerNotes.label" default="Provider Notes"/>
@@ -93,4 +84,6 @@
         </label>
         <g:textArea name="consumerNotes" disabled="true" value="${transactionInstance?.consumerNotes}"/>
     </div>
+
 </sec:ifAllGranted>
+

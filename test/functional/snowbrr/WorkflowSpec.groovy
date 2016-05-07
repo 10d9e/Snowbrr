@@ -180,6 +180,9 @@ class WorkflowSpec extends GebReportingSpec {
         createButton.click()
 
         then:
+
+
+
         logoutButton.click()
 
     }

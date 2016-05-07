@@ -5,7 +5,7 @@
     <meta name="layout" content="main">
     <g:set var="entityName" value="${message(code: 'transaction.label', default: 'Transaction')}"/>
     <title><g:message code="default.show.label" args="[entityName]"/></title>
-
+    <asset:stylesheet src="lightbox.css" />
 </head>
 
 <body>
@@ -45,14 +45,6 @@
 
                 <span class="property-value" aria-labelledby="finishBy-label"><g:formatDate
                         date="${transactionInstance?.finishBy}"/></span>
-
-            </li>
-        </g:if>
-
-        <g:if test="${transactionInstance?.photoProof}">
-            <li class="fieldcontain">
-                <span id="photoProof-label" class="property-label"><g:message code="transaction.photoProof.label"
-                                                                              default="Photo Proof"/></span>
 
             </li>
         </g:if>
@@ -114,6 +106,28 @@
             </li>
         </g:if>
 
+
+        <li class="fieldcontain">
+
+            <span id="photoProof-label" class="property-label"><g:message code="transaction.photoProof.label"
+                                                                          default="Photo Proof"/></span>
+
+
+            <a class="example-image-link" href="${createLink(controller:'Transaction', action:'proofImage', id:transactionInstance.id)}" data-lightbox="proofs">
+                <img style="max-width:100px;margin:10px;" class="avatar" src="${createLink(controller:'Transaction', action:'proofImage', id:transactionInstance.id)}" />
+            </a>
+
+            <sec:ifAllGranted roles="ROLE_PROVIDER">
+                <g:uploadForm url="[resource:transactionInstance, action:'uploadImage']">
+                    <span class="property-value" aria-labelledby="price-label">
+                       <input type="file" name="photoProof" id="photoProof" />
+                       <input type="submit" class="btn btn-default" value="Upload Photo" />
+                    </span>
+                </g:uploadForm>
+            </sec:ifAllGranted>
+        </li>
+
+
     </ol>
     <g:form url="[resource: transactionInstance, action: 'delete']" method="DELETE">
         <fieldset class="buttons">
@@ -148,5 +162,11 @@
         </fieldset>
     </g:form>
 </div>
+
+
+<asset:javascript src="lightbox-plus-jquery.min.js"/>
+
+
+
 </body>
 </html>

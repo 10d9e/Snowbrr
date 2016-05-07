@@ -19,7 +19,7 @@ class Transaction implements Comparable<Transaction>{
     static constraints = {
         status inList: ['Request', 'Cancelled', 'Price Change', 'In Progress', 'Complete'], nullable: false
         finishBy (nullable: false, min: new Date() )
-        photoProof nullable: true
+        photoProof nullable: true, maxSize: 10485760
         providerNotes nullable: true
         consumerNotes nullable: true
         provider nullable: true

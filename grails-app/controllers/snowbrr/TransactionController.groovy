@@ -219,6 +219,31 @@ class TransactionController {
         }
     }
 
+    def uploadImage(Transaction transactionInstance) {
+
+        if (transactionInstance == null) {
+            notFound()
+            return
+        }
+
+        def f = request.getFile('photoProof')
+        transactionInstance.photoProof = f.bytes
+        transactionInstance.save flush:true
+        flash.message = "Photo ( ${transactionInstance.photoProof.size()} bytes ) uploaded."
+        request.withFormat {
+            form multipartForm {
+                flash.message = message(code: 'default.updated.message', args: [message(code: 'Transaction.label', default: 'Person'), transactionInstance.id])
+                redirect transactionInstance
+            }
+            '*'{ respond transactionInstance, [status: OK] }
+        }
+    }
+
+    def proofImage(Transaction transactionInstance) {
+        response.outputStream << transactionInstance.photoProof
+        response.outputStream.flush()
+    }
+
     protected void notFound() {
         request.withFormat {
             form multipartForm {
