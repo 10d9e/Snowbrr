@@ -50,7 +50,7 @@
         <g:message code="transaction.price.label" default="Price"/>
         <span class="required-indicator">*</span>
     </label>
-    <g:field name="price" value="${fieldValue(bean: transactionInstance, field: 'price')}" required=""/>
+    <g:textField name="price" value="${fieldValue(bean: transactionInstance, field: 'price')}" required=""/>
 </div>
 </sec:ifAllGranted>
 
@@ -60,7 +60,7 @@
             <g:message code="transaction.price.label" default="Price"/>
             <span class="required-indicator">*</span>
         </label>
-        <g:field name="price" disabled="true" value="${fieldValue(bean: transactionInstance, field: 'price')}" required=""/>
+        <g:textField name="price" disabled="true" value="${fieldValue(bean: transactionInstance, field: 'price')}" required=""/>
     </div>
 </sec:ifAllGranted>
 

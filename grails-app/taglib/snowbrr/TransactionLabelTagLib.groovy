@@ -19,15 +19,15 @@ class TransactionLabelTagLib {
                 break
 
             case 'Price Change':
-                out << "<h4 style='position: relative;top: -10px;' ><span class=\"label label-warning\">${attrs.transaction.status}</span></h4>"
+                out << "<h4 style='position: relative;top: -10px;' ><span class=\"label label-info\">${attrs.transaction.status}</span></h4>"
                 break
 
             case 'In Progress':
-                out << "<h4 style='position: relative;top: -10px;' ><span class=\"label label-success\">${attrs.transaction.status}</span></h4>"
+                out << "<h4 style='position: relative;top: -10px;' ><span class=\"label label-primary\">${attrs.transaction.status}</span></h4>"
                 break
 
             case 'Complete':
-                out << "<h4 style='position: relative;top: -10px;' ><span class=\"label label-primary\">${attrs.transaction.status}</span></h4>"
+                out << "<h4 style='position: relative;top: -10px;' ><span class=\"label label-success\">${attrs.transaction.status}</span></h4>"
                 break
 
             default:

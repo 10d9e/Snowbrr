@@ -65,7 +65,7 @@ class DrivewayController {
 
         request.withFormat {
             form multipartForm {
-                flash.message = message(code: 'default.updated.message', args: [message(code: 'Driveway.label', default: 'Driveway'), drivewayInstance.id])
+                flash.message = message(code: 'default.updated.message', args: [message(code: 'driveway.label', default: 'Driveway'), drivewayInstance.id])
                 redirect drivewayInstance
             }
             '*' { respond drivewayInstance, [status: OK] }
@@ -84,7 +84,7 @@ class DrivewayController {
 
         request.withFormat {
             form multipartForm {
-                flash.message = message(code: 'default.deleted.message', args: [message(code: 'Driveway.label', default: 'Driveway'), drivewayInstance.id])
+                flash.message = message(code: 'default.deleted.message', args: [message(code: 'driveway.label', default: 'Driveway'), drivewayInstance.id])
                 redirect action: "index", method: "GET"
             }
             '*' { render status: NO_CONTENT }

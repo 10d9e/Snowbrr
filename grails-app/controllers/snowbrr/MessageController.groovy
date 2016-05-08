@@ -84,7 +84,7 @@ class MessageController {
 
         request.withFormat {
             form multipartForm {
-                flash.message = message(code: 'default.updated.message', args: [message(code: 'Message.label', default: 'Message'), messageInstance.id])
+                flash.message = message(code: 'default.updated.message', args: [message(code: 'message.label', default: 'Message'), messageInstance.id])
                 redirect messageInstance
             }
             '*' { respond messageInstance, [status: OK] }
@@ -103,7 +103,7 @@ class MessageController {
 
         request.withFormat {
             form multipartForm {
-                flash.message = message(code: 'default.deleted.message', args: [message(code: 'Message.label', default: 'Message'), messageInstance.id])
+                flash.message = message(code: 'default.deleted.message', args: [message(code: 'message.label', default: 'Message'), messageInstance.id])
                 redirect action: "index", method: "GET"
             }
             '*' { render status: NO_CONTENT }

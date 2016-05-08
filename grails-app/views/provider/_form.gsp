@@ -119,7 +119,7 @@
 		<g:message code="user.latitude.label" default="Latitude" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:field name="latitude" value="${fieldValue(bean: providerInstance?.user, field: 'latitude')}" required=""/>
+	<g:textField name="latitude" value="${fieldValue(bean: providerInstance?.user, field: 'latitude')}" required=""/>
 
 </div>
 
@@ -128,7 +128,7 @@
 		<g:message code="user.longitude.label" default="Longitude" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:field name="longitude" value="${fieldValue(bean: providerInstance?.user, field: 'longitude')}" required=""/>
+	<g:textField name="longitude" value="${fieldValue(bean: providerInstance?.user, field: 'longitude')}" required=""/>
 
 </div>
 

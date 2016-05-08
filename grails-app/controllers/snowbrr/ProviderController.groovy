@@ -91,7 +91,7 @@ class ProviderController {
 
         request.withFormat {
             form multipartForm {
-                flash.message = message(code: 'default.updated.message', args: [message(code: 'Provider.label', default: 'Provider'), providerInstance.id])
+                flash.message = message(code: 'default.updated.message', args: [message(code: 'provider.label', default: 'Provider'), providerInstance.id])
                 redirect providerInstance
             }
             '*' { respond providerInstance, [status: OK] }
@@ -111,7 +111,7 @@ class ProviderController {
 
         request.withFormat {
             form multipartForm {
-                flash.message = message(code: 'default.deleted.message', args: [message(code: 'Provider.label', default: 'Provider'), providerInstance.id])
+                flash.message = message(code: 'default.deleted.message', args: [message(code: 'provider.label', default: 'Provider'), providerInstance.id])
                 redirect action: "index", method: "GET"
             }
             '*' { render status: NO_CONTENT }

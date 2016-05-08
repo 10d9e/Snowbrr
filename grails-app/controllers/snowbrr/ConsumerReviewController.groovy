@@ -71,7 +71,7 @@ class ConsumerReviewController {
 
         request.withFormat {
             form multipartForm {
-                flash.message = message(code: 'default.updated.message', args: [message(code: 'ConsumerReview.label', default: 'ConsumerReview'), consumerReviewInstance.id])
+                flash.message = message(code: 'default.updated.message', args: [message(code: 'consumerReview.label', default: 'ConsumerReview'), consumerReviewInstance.id])
                 redirect consumerReviewInstance
             }
             '*' { respond consumerReviewInstance, [status: OK] }
@@ -91,7 +91,7 @@ class ConsumerReviewController {
 
         request.withFormat {
             form multipartForm {
-                flash.message = message(code: 'default.deleted.message', args: [message(code: 'ConsumerReview.label', default: 'ConsumerReview'), consumerReviewInstance.id])
+                flash.message = message(code: 'default.deleted.message', args: [message(code: 'consumerReview.label', default: 'ConsumerReview'), consumerReviewInstance.id])
                 redirect action: "index", method: "GET"
             }
             '*' { render status: NO_CONTENT }

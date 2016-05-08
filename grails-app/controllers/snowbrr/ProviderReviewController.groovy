@@ -71,7 +71,7 @@ class ProviderReviewController {
 
         request.withFormat {
             form multipartForm {
-                flash.message = message(code: 'default.updated.message', args: [message(code: 'ProviderReview.label', default: 'ProviderReview'), providerReviewInstance.id])
+                flash.message = message(code: 'default.updated.message', args: [message(code: 'providerReview.label', default: 'ProviderReview'), providerReviewInstance.id])
                 redirect providerReviewInstance
             }
             '*' { respond providerReviewInstance, [status: OK] }
@@ -91,7 +91,7 @@ class ProviderReviewController {
 
         request.withFormat {
             form multipartForm {
-                flash.message = message(code: 'default.deleted.message', args: [message(code: 'ProviderReview.label', default: 'ProviderReview'), providerReviewInstance.id])
+                flash.message = message(code: 'default.deleted.message', args: [message(code: 'providerReview.label', default: 'ProviderReview'), providerReviewInstance.id])
                 redirect action: "index", method: "GET"
             }
             '*' { render status: NO_CONTENT }

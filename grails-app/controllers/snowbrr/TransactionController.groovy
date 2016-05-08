@@ -265,7 +265,7 @@ class TransactionController {
 
         request.withFormat {
             form multipartForm {
-                flash.message = message(code: 'default.updated.message', args: [message(code: 'Transaction.label', default: 'Transaction'), transactionInstance.id])
+                flash.message = message(code: 'default.updated.message', args: [message(code: 'transaction.label', default: 'Transaction'), transactionInstance.id])
                 redirect transactionInstance
             }
             '*' { respond transactionInstance, [status: OK] }
@@ -285,7 +285,7 @@ class TransactionController {
 
         request.withFormat {
             form multipartForm {
-                flash.message = message(code: 'default.deleted.message', args: [message(code: 'Transaction.label', default: 'Transaction'), transactionInstance.id])
+                flash.message = message(code: 'default.deleted.message', args: [message(code: 'transaction.label', default: 'Transaction'), transactionInstance.id])
                 redirect action: "index", method: "GET"
             }
             '*' { render status: NO_CONTENT }
@@ -306,7 +306,7 @@ class TransactionController {
         flash.message = "Photo ( ${transactionInstance.photoProof.size()} bytes ) uploaded."
         request.withFormat {
             form multipartForm {
-                flash.message = message(code: 'default.updated.message', args: [message(code: 'Transaction.label', default: 'Person'), transactionInstance.id])
+                flash.message = message(code: 'default.updated.message', args: [message(code: 'transaction.label', default: 'Person'), transactionInstance.id])
                 redirect transactionInstance
             }
             '*'{ respond transactionInstance, [status: OK] }

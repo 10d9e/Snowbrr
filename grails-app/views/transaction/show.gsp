@@ -22,20 +22,18 @@
     </ul>
 </div>
 
+
 <div id="show-transaction" class="content scaffold-show" role="main">
     <h1><g:message code="default.show.label" args="[entityName]"/></h1>
 
+
     <ol class="property-list transaction">
+
+
 
         <g:if test="${transactionInstance?.status}">
             <li class="fieldcontain">
-                <span id="status-label" class="property-label"><g:message code="transaction.status.label"
-                                                                          default="Status"/></span>
-
-                <span class="property-value" aria-labelledby="status-label"> <trans:label transaction="${transactionInstance}"/></span>
-
-
-
+                <g:render template="progress" model="[transactionInstance: transactionInstance]" />
             </li>
         </g:if>
 

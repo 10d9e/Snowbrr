@@ -9,7 +9,6 @@
     <body>
         <div class="nav">
             <span class="menuButton"><a class="home" href="${createLinkTo(dir: '')}"><g:message code="home" default="Home" /></a></span>
-            <span class="menuButton"><g:link class="list" action="list"><g:message code="message.list" default="Message List" /></g:link></span>
             <span class="menuButton"><g:link class="create" action="create"><g:message code="message.new" default="New Message" /></g:link></span>
         </div>
         <div class="body">
