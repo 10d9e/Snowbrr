@@ -26,7 +26,7 @@
         <sec:ifAllGranted roles="ROLE_PROVIDER">
             <li><g:link class="edit" action="create" controller="consumerReview"
                         params="[reviewer: providerId, consumer: consumerInstance.id]">
-                <g:message code="default.button.provider.complete.label" default="Rate Customer"/></g:link>
+                <g:message code="default.button.consumer.review.label" default="Rate Customer"/></g:link>
             </li>
         </sec:ifAllGranted>
     </ul>
