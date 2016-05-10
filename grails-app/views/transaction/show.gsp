@@ -153,7 +153,7 @@
                     <g:message code="default.button.consumer.cancel.label" default="Cancel Job"/></g:link>
 
                 <g:link class="edit" action="create" controller="providerReview" params="[reviewer:transactionInstance.consumer.id,provider:transactionInstance.provider.id]" >
-                    <g:message code="default.button.provider.review.label" default="Rate Provider"/></g:link>
+                    <g:message code="default.button.provider.rate.label" default="Rate Provider"/></g:link>
             </sec:ifAllGranted>
 
             <g:link class="edit" action="edit" resource="${transactionInstance}"><g:message
