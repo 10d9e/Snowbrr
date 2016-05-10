@@ -141,19 +141,19 @@
                     <g:message code="default.button.provider.complete.label" default="Complete Job"/></g:link>
 
                 <g:link class="edit" action="providerCancel" resource="${transactionInstance}">
-                    <g:message code="default.button.provider.complete.label" default="Cancel Job"/></g:link>
+                    <g:message code="default.button.provider.cancel.label" default="Cancel Job"/></g:link>
 
                 <g:link class="edit" action="create" controller="consumerReview" params="[reviewer:transactionInstance.provider.id,consumer:transactionInstance.consumer.id]" >
-                    <g:message code="default.button.provider.complete.label" default="Rate Client"/></g:link>
+                    <g:message code="default.button.consumer.review.label" default="Rate Client"/></g:link>
 
             </sec:ifAllGranted>
 
             <sec:ifAllGranted roles="ROLE_CONSUMER">
                 <g:link class="edit" action="consumerCancel" resource="${transactionInstance}">
-                    <g:message code="default.button.provider.complete.label" default="Cancel Job"/></g:link>
+                    <g:message code="default.button.consumer.cancel.label" default="Cancel Job"/></g:link>
 
                 <g:link class="edit" action="create" controller="providerReview" params="[reviewer:transactionInstance.consumer.id,provider:transactionInstance.provider.id]" >
-                    <g:message code="default.button.provider.complete.label" default="Rate Provider"/></g:link>
+                    <g:message code="default.button.provider.review.label" default="Rate Provider"/></g:link>
             </sec:ifAllGranted>
 
             <g:link class="edit" action="edit" resource="${transactionInstance}"><g:message
